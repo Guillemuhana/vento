@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply font-body text-ink bg-[#F6F6F6] antialiased;
+}
+
+h1, h2, h3, h4 {
+  @apply font-display text-ink;
+}
+
+::selection {
+  @apply bg-mango-100;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.container-app {
+  @apply max-w-md mx-auto min-h-screen bg-base relative pb-24;
+}
+
+@media (min-width: 768px) {
+  .container-app {
+    @apply max-w-lg shadow-float;
+  }
+}
+
+.input-field {
+  @apply w-full rounded-xl border border-base-line bg-base px-4 py-3 text-sm text-ink placeholder:text-ink-faint focus:outline-none focus:ring-2 focus:ring-mango-400 focus:border-mango-400 transition;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-ink text-white font-semibold text-sm px-5 py-3 hover:bg-black transition disabled:opacity-40 disabled:cursor-not-allowed;
+}
+
+.btn-accent {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-mango-500 text-white font-bold text-sm px-5 py-3 shadow-[0_4px_14px_rgba(255,74,18,0.35)] hover:bg-mango-600 transition disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none;
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border border-base-line bg-base text-ink font-semibold text-sm px-5 py-3 hover:bg-base-muted transition disabled:opacity-40;
+}
+
+.card {
+  @apply bg-base rounded-xl2 shadow-card border border-base-line;
+}
