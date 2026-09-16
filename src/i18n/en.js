@@ -24,9 +24,9 @@ export default {
 
   'localValue.eyebrow': 'Vento Miami',
   'localValue.courierTitle': 'Your work and earnings come first',
-  'localValue.courierText': "We are a local Miami app. Our goal is to charge about half of Uber or Rappi's commission so more value stays with every delivery.",
+  'localValue.courierText': "We are a local Miami app. Our goal is to charge about half of Uber or Rappi's commission so more value stays with every delivery. We will also run daily promotions by building and neighborhood.",
   'localValue.storeTitle': 'More margin for your business',
-  'localValue.storeText': "Vento was built in Miami to work closely with local stores. Our proposal is to charge about half of Uber or Rappi's commission and help you sell with more margin.",
+  'localValue.storeText': "Vento was built in Miami to work closely with local stores. Our proposal is to charge about half of Uber or Rappi's commission, help you sell with more margin, and run daily promotions by building and neighborhood.",
 
   'nav.home': 'Home',
   'nav.offers': 'Offers',
