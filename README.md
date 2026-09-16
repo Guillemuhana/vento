@@ -82,7 +82,7 @@ git push origin main
 ```
 
 Vercel está conectado a ese repo y despliega solo en cada push a `main`
-(https://vento-phi.vercel.app). Las variables `VITE_SUPABASE_URL` y
+(https://just-minutes.vercel.app). Las variables `VITE_SUPABASE_URL` y
 `VITE_SUPABASE_ANON_KEY` se configuran en Vercel, no en el repo.
 
 > Vite compila las variables dentro del bundle: cambiarlas en Vercel no hace
