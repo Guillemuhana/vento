@@ -85,7 +85,10 @@ export default {
   'banner.fioritoRibeye.title': 'Ribeye a la parrilla',
   'banner.fioritoRibeye.subtitle': 'Elegí tu corte favorito',
   'buildingPromo.eyebrow': 'Promoción por edificio',
-  'buildingPromo.text': 'Promos especiales para quienes viven y trabajan en Neo Lofts. Pedí de comercios locales de Miami.',
+  'buildingPromo.daysLabel': 'Días de promo',
+  'buildingPromo.tuesday': 'Martes',
+  'buildingPromo.thursday': 'Jueves',
+  'buildingPromo.text': 'Promos especiales para quienes viven y trabajan en Neo Lofts. Pedí de comercios locales de Miami y aprovechá beneficios exclusivos esos días.',
   'buildingPromo.cta': 'Ver promociones',
 
   'offers.title': 'Ofertas',

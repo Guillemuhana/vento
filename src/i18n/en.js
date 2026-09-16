@@ -85,7 +85,10 @@ export default {
   'banner.fioritoRibeye.title': 'Grilled ribeye',
   'banner.fioritoRibeye.subtitle': 'Choose your favorite cut',
   'buildingPromo.eyebrow': 'Building promotion',
-  'buildingPromo.text': 'Special offers for people who live and work at Neo Lofts. Order from local Miami stores.',
+  'buildingPromo.daysLabel': 'Promo days',
+  'buildingPromo.tuesday': 'Tuesday',
+  'buildingPromo.thursday': 'Thursday',
+  'buildingPromo.text': 'Special offers for people who live and work at Neo Lofts. Order from local Miami stores and unlock exclusive benefits on those days.',
   'buildingPromo.cta': 'See promotions',
 
   'offers.title': 'Offers',
