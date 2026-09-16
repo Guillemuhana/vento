@@ -6,5 +6,11 @@ Disallow: /cuenta/
 Disallow: /admin/
 Disallow: /comercio/
 Disallow: /repartidor/
+Disallow: /pedido/
+Disallow: /checkout
+Disallow: /carrito
+Disallow: /buscar
+Disallow: /favoritos
+Disallow: /historial
 
 Sitemap: https://just-minutes.vercel.app/sitemap.xml

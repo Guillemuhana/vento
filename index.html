@@ -14,6 +14,12 @@
     />
     <meta name="author" content="StudioB2B · Guillermo Muhana" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="geo.region" content="US-FL" />
+    <meta name="geo.placename" content="Miami" />
+    <meta name="geo.position" content="25.7617;-80.1918" />
+    <meta name="ICBM" content="25.7617, -80.1918" />
+    <meta name="format-detection" content="telephone=no" />
     <link rel="canonical" href="https://just-minutes.vercel.app/" />
     <link rel="alternate" hreflang="es-US" href="https://just-minutes.vercel.app/" />
     <link rel="alternate" hreflang="en-US" href="https://just-minutes.vercel.app/" />
@@ -28,6 +34,7 @@
     />
     <meta property="og:url" content="https://just-minutes.vercel.app/" />
     <meta property="og:image" content="https://just-minutes.vercel.app/assets/logo/just-minutes.png" />
+    <meta property="og:image:alt" content="Just Minutes, delivery local en Miami" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Just Minutes | Delivery local en Miami" />
     <meta
@@ -71,6 +78,41 @@
             "publisher": {
               "@id": "https://just-minutes.vercel.app/#organization"
             }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://just-minutes.vercel.app/#website",
+            "name": "Just Minutes",
+            "url": "https://just-minutes.vercel.app/",
+            "inLanguage": ["es-US", "en-US"],
+            "publisher": {
+              "@id": "https://just-minutes.vercel.app/#organization"
+            },
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://just-minutes.vercel.app/buscar?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          },
+          {
+            "@type": "Service",
+            "@id": "https://just-minutes.vercel.app/#delivery-service",
+            "name": "Just Minutes Miami delivery",
+            "serviceType": "Food and local products delivery",
+            "provider": {
+              "@id": "https://just-minutes.vercel.app/#organization"
+            },
+            "areaServed": [
+              { "@type": "City", "name": "Miami" },
+              { "@type": "Place", "name": "Brickell" },
+              { "@type": "Place", "name": "Miami River" },
+              { "@type": "Place", "name": "Downtown Miami" },
+              { "@type": "Place", "name": "Little Havana" }
+            ],
+            "availableChannel": {
+              "@type": "ServiceChannel",
+              "serviceUrl": "https://just-minutes.vercel.app/"
+            }
           }
         ]
       }
@@ -86,6 +128,17 @@
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <main>
+        <h1>Just Minutes: delivery local en Miami</h1>
+        <p>Pedí comida, helados y productos de comercios locales de Miami con entrega a domicilio.</p>
+        <p>Encontrá restaurantes, promociones por edificio y oportunidades para comercios y repartidores.</p>
+        <nav>
+          <a href="/ofertas">Ver ofertas en Miami</a>
+          <a href="/categoria/comida">Comida a domicilio en Miami</a>
+        </nav>
+      </main>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
