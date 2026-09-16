@@ -8,7 +8,10 @@ import { supabase } from '../../lib/supabase'
 import { formatMoney } from '../../utils/format'
 import { useT } from '../../i18n'
 
-const DELIVERY_FEE = 800
+// Costo de envío en dólares. El servidor lo vuelve a aplicar al crear el pedido
+// (ver supabase/migrations/008_seguridad.sql -> costo_envio_base), así que si
+// cambia acá hay que cambiarlo también allá.
+const DELIVERY_FEE = 3.99
 const PAYMENT_METHODS = [
   { value: 'efectivo', icon: '💵' },
   { value: 'tarjeta', icon: '💳' },
