@@ -69,7 +69,7 @@ function Banner({ banner }) {
         src={banner.image}
         alt={t(banner.titleKey)}
         onError={() => setBroken(true)}
-        className="h-full w-full object-cover"
+        className="h-full w-full object-contain bg-base-muted"
       />
     ) : (
       <div className={`h-full w-full ${banner.bg || 'bg-base-muted'} flex flex-col justify-center px-6`}>
