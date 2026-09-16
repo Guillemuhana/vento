@@ -10,6 +10,7 @@ import StoreRail from '../../components/home/StoreRail'
 import Spinner from '../../components/ui/Spinner'
 import EmptyState from '../../components/ui/EmptyState'
 import ScrollTopPill from '../../components/layout/ScrollTopPill'
+import BuildingPromotion from '../../components/home/BuildingPromotion'
 import { IconSearch, IconChevronDown } from '../../components/ui/Icon'
 import AppIcon from '../../components/ui/AppIcon'
 import { useT } from '../../i18n'
@@ -28,6 +29,7 @@ import {
   inspiradoEnTusGustos,
   esElDia,
 } from '../../utils/feed'
+import { NEO_LOFTS_PROMOTION } from '../../data/buildingPromotions'
 
 export default function Home() {
   const navigate = useNavigate()
@@ -148,6 +150,8 @@ export default function Home() {
       <div className="mb-7">
         <PromoCarousel banners={banners} />
       </div>
+
+      <BuildingPromotion building={NEO_LOFTS_PROMOTION} />
 
       {loading && <Spinner className="py-10" />}
 

@@ -84,6 +84,9 @@ export default {
   'banner.fioritoPulpo.subtitle': 'A Fiorito specialty',
   'banner.fioritoRibeye.title': 'Grilled ribeye',
   'banner.fioritoRibeye.subtitle': 'Choose your favorite cut',
+  'buildingPromo.eyebrow': 'Building promotion',
+  'buildingPromo.text': 'Special offers for people who live and work at Neo Lofts. Order from local Miami stores.',
+  'buildingPromo.cta': 'See promotions',
 
   'offers.title': 'Offers',
   'offers.freeShipping': 'Best with free delivery',
