@@ -25,26 +25,26 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F6F6F6] px-4 py-5 sm:px-6 sm:py-8">
-      <div className="mx-auto flex min-h-[calc(100vh-2.5rem)] max-w-5xl overflow-hidden rounded-[2rem] bg-base shadow-float sm:min-h-[calc(100vh-4rem)]">
+    <div className="login-stage min-h-screen bg-[#F6F6F6] px-4 py-5 sm:px-6 sm:py-8">
+      <div className="login-shell mx-auto flex min-h-[calc(100vh-2.5rem)] max-w-5xl overflow-hidden rounded-[2rem] bg-base shadow-float sm:min-h-[calc(100vh-4rem)]">
         <div className="relative hidden w-[46%] overflow-hidden bg-ink px-10 py-12 md:flex md:flex-col md:justify-between">
-          <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-mango-500/90" />
-          <div className="absolute -bottom-32 -left-20 h-72 w-72 rounded-full border-[32px] border-white/10" />
-          <div className="relative">
+          <div className="login-orb absolute -right-24 -top-24 h-64 w-64 rounded-full bg-mango-500/90" />
+          <div className="login-ring absolute -bottom-32 -left-20 h-72 w-72 rounded-full border-[32px] border-white/10" />
+          <div className="login-mark relative">
             <img
               src="/assets/logo/just-minutes.png"
               alt="Just Minutes"
               className="w-full max-w-[360px] object-contain brightness-0 invert"
             />
           </div>
-          <div className="relative max-w-xs text-white">
+          <div className="login-copy relative max-w-xs text-white">
             <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-mango-300">Vento Miami</p>
             <p className="mt-3 font-display text-3xl font-bold leading-tight">{t('auth.tagline')}</p>
           </div>
         </div>
 
-        <main className="flex w-full flex-col justify-center px-6 py-10 sm:px-12 md:w-[54%] md:px-16">
-          <div className="mb-9 text-center md:text-left">
+        <main className="login-form flex w-full flex-col justify-center px-6 py-10 sm:px-12 md:w-[54%] md:px-16">
+          <div className="login-heading mb-9 text-center md:text-left">
             <div className="mb-5 flex justify-center md:hidden">
               <img
                 src="/assets/logo/just-minutes.png"
@@ -62,7 +62,7 @@ export default function Login() {
               required
               placeholder={t('auth.email')}
               autoComplete="email"
-              className="input-field h-14 text-base"
+              className="login-field input-field h-14 text-base"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
@@ -71,11 +71,11 @@ export default function Login() {
               required
               placeholder={t('auth.password')}
               autoComplete="current-password"
-              className="input-field h-14 text-base"
+              className="login-field input-field h-14 text-base"
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
             />
-            <button type="submit" disabled={loading} className="btn-accent mt-2 h-14 w-full text-base">
+            <button type="submit" disabled={loading} className="login-submit btn-accent mt-2 h-14 w-full text-base">
               {loading ? t('auth.signingIn') : t('auth.signIn')}
             </button>
           </form>

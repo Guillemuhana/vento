@@ -89,3 +89,58 @@ h1, h2, h3, h4 {
 .badge-promo {
   @apply inline-flex items-center gap-1 rounded-md bg-promo text-ink font-bold text-[11px] leading-none px-2 py-1;
 }
+
+/* Entrada del login: marca viva, pero sin movimiento obligatorio. */
+.login-stage {
+  isolation: isolate;
+  background-image: radial-gradient(circle at 15% 10%, rgba(255, 122, 71, 0.14), transparent 28rem),
+    radial-gradient(circle at 90% 90%, rgba(16, 24, 40, 0.08), transparent 24rem);
+}
+.login-shell {
+  animation: login-shell-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.login-orb {
+  animation: login-orb-drift 8s ease-in-out infinite alternate;
+}
+.login-ring {
+  animation: login-ring-drift 10s ease-in-out infinite alternate;
+}
+.login-mark {
+  animation: login-content-in 0.7s 0.12s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.login-copy {
+  animation: login-content-in 0.7s 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.login-heading,
+.login-field,
+.login-submit {
+  animation: login-content-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.login-field:nth-child(1) { animation-delay: 0.12s; }
+.login-field:nth-child(2) { animation-delay: 0.2s; }
+.login-submit { animation-delay: 0.28s; }
+.login-submit:hover { transform: translateY(-2px); }
+
+@keyframes login-shell-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes login-content-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes login-orb-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(-18px, 16px, 0) scale(1.08); }
+}
+@keyframes login-ring-drift {
+  from { transform: rotate(-8deg) translateX(0); }
+  to { transform: rotate(8deg) translateX(18px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .login-shell, .login-orb, .login-ring, .login-mark, .login-copy,
+  .login-heading, .login-field, .login-submit {
+    animation: none;
+  }
+  .login-submit:hover { transform: none; }
+}
