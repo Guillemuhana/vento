@@ -7,7 +7,7 @@ import { supabase } from '../../lib/supabase'
 import { useAuthStore } from '../../store/useAuthStore'
 import { useOrders } from '../../hooks/useOrders'
 import { formatMoney, formatDateTime } from '../../utils/format'
-import { ORDER_STATUS_LABEL } from '../../utils/orderStatus'
+import { useT } from '../../i18n'
 
 const ACTIONS = {
   pendiente: [
@@ -19,6 +19,7 @@ const ACTIONS = {
 }
 
 export default function Orders() {
+  const { t } = useT()
   const session = useAuthStore((s) => s.session)
   const [storeId, setStoreId] = useState(null)
 
@@ -63,7 +64,7 @@ export default function Orders() {
                 <p className="text-xs text-ink-faint">{formatDateTime(order.created_at)}</p>
               </div>
               <span className="text-xs font-semibold bg-base-muted rounded-full px-2.5 py-1">
-                {ORDER_STATUS_LABEL[order.status]}
+                {t(`status.${order.status}`)}
               </span>
             </div>
             <p className="text-sm font-bold mb-3">{formatMoney(order.total)}</p>

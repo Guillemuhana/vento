@@ -6,9 +6,11 @@ import Navbar from '../../components/layout/Navbar'
 import ProductCard from '../../components/store/ProductCard'
 import Spinner from '../../components/ui/Spinner'
 import { useCartStore } from '../../store/useCartStore'
+import { useT } from '../../i18n'
 
 export default function StoreDetail() {
   const { id } = useParams()
+  const { t } = useT()
   const [store, setStore] = useState(null)
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -33,13 +35,13 @@ export default function StoreDetail() {
   function handleAdd(product) {
     try {
       addItem(id, store.name, product, 1)
-      toast.success(`${product.name} agregado`)
+      toast.success(t('store.added', { product: product.name }))
     } catch (err) {
       if (err.message === 'DIFFERENT_STORE') {
-        if (confirm('Tu carrito tiene productos de otro comercio. ¿Querés vaciarlo y agregar este?')) {
+        if (confirm(t('store.differentStore'))) {
           clearCart()
           addItem(id, store.name, product, 1)
-          toast.success(`${product.name} agregado`)
+          toast.success(t('store.added', { product: product.name }))
         }
       }
     }
@@ -49,7 +51,7 @@ export default function StoreDetail() {
   if (!store) return null
 
   const grouped = products.reduce((acc, p) => {
-    const key = p.category || 'Otros'
+    const key = p.category || t('common.other')
     acc[key] = acc[key] || []
     acc[key].push(p)
     return acc
@@ -68,11 +70,11 @@ export default function StoreDetail() {
       <div className="px-4 py-3 border-b border-base-line">
         <p className="text-xs text-ink-faint capitalize">{store.category}</p>
         <div className="flex items-center gap-2 text-xs text-ink-soft mt-1">
-          <span>⭐ {store.rating?.toFixed(1) || 'Nuevo'}</span>
+          <span>⭐ {store.rating?.toFixed(1) || t('store.new')}</span>
           <span>·</span>
           <span>{store.eta_minutes || 25}-{(store.eta_minutes || 25) + 10} min</span>
           <span>·</span>
-          <span>{store.is_open ? 'Abierto' : 'Cerrado'}</span>
+          <span>{store.is_open ? t('store.open') : t('common.closed')}</span>
         </div>
       </div>
 
@@ -88,7 +90,7 @@ export default function StoreDetail() {
           </div>
         ))}
         {products.length === 0 && (
-          <p className="text-sm text-ink-faint text-center py-10">Este comercio todavía no cargó productos.</p>
+          <p className="text-sm text-ink-faint text-center py-10">{t('store.noProducts')}</p>
         )}
       </div>
     </div>

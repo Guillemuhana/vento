@@ -35,22 +35,40 @@ App de delivery completa (estilo Rappi/PedidosYa) construida con **React + Vite 
 - Métricas globales (comercios, usuarios, pedidos, repartidores)
 - Listado y gestión básica de comercios y usuarios
 
-## 🚀 Demo ya conectada (Supabase)
+## 🚀 Supabase
 
-Ya armé un proyecto de Supabase demo (`vento-demo`, plan free, región São Paulo) y le apliqué el schema completo (7 tablas + RLS + Realtime activado en `orders` y `couriers`).
+El proyecto de la app es el de ref `irvugeydaygqxedlmuml`. Tiene aplicado el schema
+completo: 8 tablas con RLS, Realtime en `orders` y `couriers`, las columnas de
+perfil y promos, favoritos, el fix de recursión en las políticas y el trigger que
+crea el perfil al registrarse.
+
+Dashboard: https://supabase.com/dashboard/project/irvugeydaygqxedlmuml
 
 ```
-VITE_SUPABASE_URL=https://pywtzrphjtjrtdgemyqv.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB5d3R6cnBoanRqcnRkZ2VteXF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk1MDg2NjMsImV4cCI6MjEwNTA4NDY2M30.ZEjuKp01yM2Rmr3KmsWHAxLE9juhwTE76FiNzaVKYQs
+VITE_SUPABASE_URL=https://irvugeydaygqxedlmuml.supabase.co
+VITE_SUPABASE_ANON_KEY=<la anon key del proyecto, en Settings > API Keys>
 ```
 
-Esta anon key está pensada para ser pública (queda protegida por las políticas RLS), pero por las dudas no la subí al repo — armá tu propio `.env` local:
-```bash
-cp .env.example .env
-# pegá las dos líneas de arriba en .env
-```
+La anon key es pública por diseño (la protegen las políticas RLS), pero el `.env`
+igual no va al repo: está en `.gitignore`.
 
-Este proyecto es solo para la demo: cuando pasemos a producción armamos uno nuevo (o promovemos este) y regeneramos las keys.
+> **Ojo**: Vite lee el `.env` solo al arrancar. Si lo cambiás, reiniciá `npm run dev`
+> o vas a seguir viendo "Failed to fetch" contra la URL vieja.
+
+### Migraciones
+
+El orden, si hay que rearmar la base desde cero (o pegá directo
+`supabase/setup_completo.sql`, que es todo esto junto):
+
+1. `supabase/schema.sql` — tablas, índices, trigger de `updated_at`, RLS y Realtime.
+2. `002_perfil_y_favoritos.sql` — campos de perfil, promos de comercios
+   (`free_delivery`, `promo_label`, `min_order`) y la tabla `favorites`.
+3. `003_fix_recursion_rls.sql` — corta la recursión infinita entre las políticas de
+   `couriers` y `orders`, y cierra el agujero que dejaba ver los pedidos sin
+   repartidor a cualquier usuario logueado.
+4. `004_perfil_al_registrarse.sql` — crea el perfil (y el comercio o el registro de
+   repartidor, según el rol) con un trigger sobre `auth.users`. Sin esto el registro
+   queda a medias cuando la confirmación de email está activada.
 
 ## Subir a GitHub
 
@@ -71,7 +89,7 @@ Si te pide credenciales, usá un Personal Access Token de GitHub como contraseñ
    npm install
    ```
 
-2. **Configurá las variables de entorno** con las credenciales de la demo (ya creada, ver arriba):
+2. **Configurá las variables de entorno** con las credenciales de arriba (el `.env` local ya está listo):
    ```bash
    cp .env.example .env
    ```
@@ -135,3 +153,31 @@ delivery-app/
 │   └── main.jsx
 └── README.md
 ```
+
+## Cuentas de demo
+
+Los tres roles ya están creados en Supabase, con datos cargados
+(12 comercios, 69 productos):
+
+| Rol | Email | Contraseña |
+| --- | --- | --- |
+| Cliente | `cliente@vento.demo` | `vento1234` |
+| Comercio (Fiorito) | `fiorito@vento.demo` | `vento1234` |
+| Repartidor | `repartidor@vento.demo` | `vento1234` |
+
+Son cuentas de demo: borralas antes de pasar a producción.
+
+## Idiomas
+
+La app arranca en **inglés** y se cambia a **castellano** desde
+Cuenta → Configuración → Idioma. La elección queda guardada en el dispositivo.
+
+- Los textos viven en `src/i18n/en.js` y `src/i18n/es.js` (mismas claves en los dos).
+- Para agregar un idioma: copiá uno de esos archivos, sumalo a `DICCIONARIOS` y a
+  `LANGUAGES` en `src/i18n/index.jsx`.
+- Si falta una clave en un idioma, cae automáticamente al inglés.
+- Los precios y fechas siguen el idioma activo: `$18.500` en castellano,
+  `ARS 18,500` en inglés.
+
+Los paneles de comercio, repartidor y admin quedaron en castellano salvo los
+estados del pedido, que sí se traducen.

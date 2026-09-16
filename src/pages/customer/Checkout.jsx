@@ -6,16 +6,18 @@ import { useCartStore } from '../../store/useCartStore'
 import { useAuthStore } from '../../store/useAuthStore'
 import { supabase } from '../../lib/supabase'
 import { formatMoney } from '../../utils/format'
+import { useT } from '../../i18n'
 
 const DELIVERY_FEE = 800
 const PAYMENT_METHODS = [
-  { value: 'efectivo', label: 'Efectivo', icon: '💵' },
-  { value: 'tarjeta', label: 'Tarjeta guardada', icon: '💳' },
-  { value: 'mercadopago', label: 'MercadoPago', icon: '📲' },
+  { value: 'efectivo', icon: '💵' },
+  { value: 'tarjeta', icon: '💳' },
+  { value: 'mercadopago', icon: '📲' },
 ]
 
 export default function Checkout() {
   const navigate = useNavigate()
+  const { t } = useT()
   const { items, storeId, storeName, subtotal, clear } = useCartStore()
   const profile = useAuthStore((s) => s.profile)
   const session = useAuthStore((s) => s.session)
@@ -28,7 +30,7 @@ export default function Checkout() {
 
   async function handlePlaceOrder() {
     if (!address.trim()) {
-      toast.error('Ingresá una dirección de entrega')
+      toast.error(t('checkout.addressRequired'))
       return
     }
     setPlacing(true)
@@ -63,10 +65,10 @@ export default function Checkout() {
       if (itemsError) throw itemsError
 
       clear()
-      toast.success('¡Pedido realizado!')
+      toast.success(t('checkout.created'))
       navigate(`/pedido/${order.id}`)
     } catch (err) {
-      toast.error(err.message || 'No pudimos crear el pedido')
+      toast.error(err.message || t('checkout.error'))
     } finally {
       setPlacing(false)
     }
@@ -74,21 +76,21 @@ export default function Checkout() {
 
   return (
     <div className="container-app">
-      <Navbar title="Confirmar pedido" back />
+      <Navbar title={t('checkout.title')} back />
       <div className="px-4 py-4 space-y-5">
         <section>
-          <h3 className="font-semibold text-sm mb-2">Dirección de entrega</h3>
+          <h3 className="font-semibold text-sm mb-2">{t('checkout.address')}</h3>
           <textarea
             className="input-field"
             rows={2}
-            placeholder="Calle, número, piso/depto, referencias..."
+            placeholder={t('checkout.addressPlaceholder')}
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
         </section>
 
         <section>
-          <h3 className="font-semibold text-sm mb-2">Método de pago</h3>
+          <h3 className="font-semibold text-sm mb-2">{t('checkout.payment')}</h3>
           <div className="space-y-2">
             {PAYMENT_METHODS.map((m) => (
               <button
@@ -99,35 +101,35 @@ export default function Checkout() {
                 }`}
               >
                 <span className="text-lg">{m.icon}</span>
-                {m.label}
+                {t(`pay.${m.value}`)}
               </button>
             ))}
           </div>
         </section>
 
         <section>
-          <h3 className="font-semibold text-sm mb-2">Notas para el repartidor (opcional)</h3>
+          <h3 className="font-semibold text-sm mb-2">{t('checkout.notes')}</h3>
           <textarea
             className="input-field"
             rows={2}
-            placeholder="Ej: timbre no funciona, dejar en portería..."
+            placeholder={t('checkout.notesPlaceholder')}
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
           />
         </section>
 
         <section className="card p-4 space-y-1.5">
-          <h3 className="font-semibold text-sm mb-1">Resumen — {storeName}</h3>
+          <h3 className="font-semibold text-sm mb-1">{t('checkout.summary', { store: storeName })}</h3>
           <div className="flex justify-between text-sm text-ink-soft">
-            <span>Subtotal</span>
+            <span>{t('common.subtotal')}</span>
             <span>{formatMoney(subtotal())}</span>
           </div>
           <div className="flex justify-between text-sm text-ink-soft">
-            <span>Envío</span>
+            <span>{t('common.delivery')}</span>
             <span>{formatMoney(DELIVERY_FEE)}</span>
           </div>
           <div className="flex justify-between text-base font-bold pt-1 border-t border-base-line mt-1">
-            <span>Total</span>
+            <span>{t('common.total')}</span>
             <span>{formatMoney(total)}</span>
           </div>
         </section>
@@ -136,7 +138,7 @@ export default function Checkout() {
       <div className="fixed bottom-0 left-0 right-0 px-4 py-3 bg-base border-t border-base-line">
         <div className="max-w-md md:max-w-lg mx-auto">
           <button onClick={handlePlaceOrder} disabled={placing} className="btn-accent w-full">
-            {placing ? 'Confirmando...' : `Confirmar pedido · ${formatMoney(total)}`}
+            {placing ? t('checkout.placing') : t('checkout.place', { total: formatMoney(total) })}
           </button>
         </div>
       </div>

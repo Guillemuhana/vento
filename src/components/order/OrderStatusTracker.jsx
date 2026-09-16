@@ -1,10 +1,13 @@
-import { ORDER_STATUS_FLOW, ORDER_STATUS_LABEL, statusProgress } from '../../utils/orderStatus'
+import { ORDER_STATUS_FLOW, statusProgress } from '../../utils/orderStatus'
+import { useT } from '../../i18n'
 
 export default function OrderStatusTracker({ status }) {
+  const { t } = useT()
+
   if (status === 'cancelado') {
     return (
       <div className="rounded-xl bg-danger-400/10 text-danger-600 text-sm font-semibold px-4 py-3">
-        {ORDER_STATUS_LABEL.cancelado}
+        {t('status.cancelado')}
       </div>
     )
   }
@@ -20,7 +23,7 @@ export default function OrderStatusTracker({ status }) {
           style={{ width: `${progress}%` }}
         />
       </div>
-      <p className="font-semibold text-sm mb-3">{ORDER_STATUS_LABEL[status]}</p>
+      <p className="font-semibold text-sm mb-3">{t(`status.${status}`)}</p>
       <ol className="space-y-2">
         {ORDER_STATUS_FLOW.map((step, idx) => (
           <li key={step} className="flex items-center gap-2 text-xs">
@@ -30,7 +33,7 @@ export default function OrderStatusTracker({ status }) {
               }`}
             />
             <span className={idx <= currentIdx ? 'text-ink font-medium' : 'text-ink-faint'}>
-              {ORDER_STATUS_LABEL[step]}
+              {t(`status.${step}`)}
             </span>
           </li>
         ))}
