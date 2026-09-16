@@ -47,12 +47,13 @@ export default function Login() {
   return (
     <div className="container-app flex flex-col justify-center px-6 py-10">
       <div className="mb-10 text-center">
-        <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-mango-500 text-2xl mb-3 shadow-[0_6px_18px_rgba(255,74,18,0.4)]">
-          ⚡
+        <div className="mb-3 flex justify-center">
+          <img
+            src="/assets/logo/logovento.png"
+            alt="Vento logo"
+            className="h-24 w-auto object-contain"
+          />
         </div>
-        <h1 className="text-2xl font-extrabold">
-          Vento<span className="text-mango-500">.</span>
-        </h1>
         <p className="text-sm text-ink-faint">Todo lo que necesitás, en minutos.</p>
       </div>
 
