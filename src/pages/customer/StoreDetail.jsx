@@ -30,7 +30,7 @@ export default function StoreDetail() {
       setProducts(
         (productsData || []).map((product) => ({
           ...product,
-          image_url: product.image_url || getFioritoProductImage(storeData?.name),
+          image_url: product.image_url || getFioritoProductImage(storeData?.name, product.name),
         }))
       )
       setLoading(false)
