@@ -128,6 +128,7 @@ export default {
   'account.signOutAll': 'Cerrar todas las sesiones',
   'account.version': 'Versión {version}',
   'account.madeIn': 'Hecho con 🧡 en Miami',
+  'account.developedBy': 'Desarrollada por StudioB2B · Guillermo Muhana',
   'account.yourAccount': 'Tu cuenta',
   'account.chooseLanguage': 'Elegí el idioma',
 

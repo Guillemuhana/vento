@@ -183,6 +183,7 @@ export default function Account() {
       <footer className="px-4 pt-6 pb-2 text-[12px] text-ink-faint/70 leading-relaxed">
         <p>{t('account.version', { version: APP_VERSION })}</p>
         <p>{t('account.madeIn')}</p>
+        <p className="mt-1 font-medium text-ink-faint/80">{t('account.developedBy')}</p>
       </footer>
 
       <LanguageSheet open={langOpen} onClose={() => setLangOpen(false)} lang={lang} setLang={setLang} title={t('account.chooseLanguage')} />
