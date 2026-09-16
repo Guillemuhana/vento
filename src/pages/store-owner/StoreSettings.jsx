@@ -48,6 +48,7 @@ export default function StoreSettings() {
       <Navbar title="Ajustes del comercio" back />
       <form onSubmit={handleSubmit} className="px-4 py-4 space-y-3">
         <input
+          required
           className="input-field"
           placeholder="Nombre del comercio"
           value={store.name}
@@ -72,6 +73,7 @@ export default function StoreSettings() {
           ))}
         </select>
         <input
+          required
           className="input-field"
           placeholder="Dirección"
           value={store.address || ''}
@@ -79,6 +81,8 @@ export default function StoreSettings() {
         />
         <input
           type="number"
+          required
+          min="1"
           className="input-field"
           placeholder="Tiempo estimado (minutos)"
           value={store.eta_minutes || ''}

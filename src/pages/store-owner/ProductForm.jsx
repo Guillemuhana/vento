@@ -22,12 +22,17 @@ export default function ProductForm() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+    const price = Number(form.price)
     if (!storeId) {
       toast.error('No encontramos tu comercio')
       return
     }
+    if (!form.name.trim() || !Number.isFinite(price) || price <= 0) {
+      toast.error('Completá el nombre y un precio válido')
+      return
+    }
     setSaving(true)
-    const payload = { ...form, price: Number(form.price), store_id: storeId }
+    const payload = { ...form, name: form.name.trim(), price, store_id: storeId }
     const query = isEditing
       ? supabase.from('products').update(payload).eq('id', product.id)
       : supabase.from('products').insert(payload)
@@ -63,8 +68,8 @@ export default function ProductForm() {
         <input
           required
           type="number"
-          min="0"
-          step="1"
+          min="0.01"
+          step="0.01"
           placeholder="Precio"
           className="input-field"
           value={form.price}

@@ -68,6 +68,18 @@ export default function Orders() {
               </span>
             </div>
             <p className="text-sm font-bold mb-3">{formatMoney(order.total)}</p>
+            <div className="border-t border-base-line pt-3 mb-3 space-y-1.5">
+              {(order.order_items || []).map((item) => (
+                <div key={item.id} className="flex items-center justify-between gap-3 text-sm">
+                  <span className="min-w-0 truncate">
+                    <span className="font-semibold">{item.quantity}x</span> {item.product_name}
+                  </span>
+                  <span className="text-ink-soft flex-shrink-0">
+                    {formatMoney(item.unit_price * item.quantity)}
+                  </span>
+                </div>
+              ))}
+            </div>
             <div className="flex gap-2">
               {(ACTIONS[order.status] || []).map((action) => (
                 <button

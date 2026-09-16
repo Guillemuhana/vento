@@ -15,7 +15,7 @@ export function useOrders({ column, value, statuses } = {}) {
     setLoading(true)
     let query = supabase
       .from('orders')
-      .select('*, stores(name, logo_url)')
+      .select('*, stores(name, logo_url), order_items(*)')
       .eq(column, value)
       .order('created_at', { ascending: false })
 
