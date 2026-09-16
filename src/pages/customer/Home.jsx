@@ -98,19 +98,28 @@ export default function Home() {
 
       {/* Dirección de entrega */}
       <header className="px-4 pt-4 pb-3">
-        <p className="text-[13px] text-ink-faint leading-tight">{profile?.city || 'Córdoba'}</p>
-        <button
-          type="button"
-          onClick={() => navigate('/cuenta/direcciones')}
-          className="flex items-center gap-2 text-left"
-        >
-          <span className="font-display font-bold text-[20px] leading-tight truncate max-w-[75vw]">
-            {profile?.address || t('home.addAddress')}
-          </span>
-          <span className="h-7 w-7 rounded-full bg-base-muted flex items-center justify-center flex-shrink-0 text-ink">
-            <AppIcon path="ui/chevron-abajo" fallback={IconChevronDown} size={16} />
-          </span>
-        </button>
+        <div className="flex justify-center mb-5">
+          <img
+            src="/assets/logo/just-minutes.png"
+            alt="Just Minutes"
+            className="h-9 w-auto max-w-[190px] object-contain"
+          />
+        </div>
+        <div>
+          <p className="text-[13px] text-ink-faint leading-tight">{profile?.city || 'Córdoba'}</p>
+          <button
+            type="button"
+            onClick={() => navigate('/cuenta/direcciones')}
+            className="flex items-center gap-2 text-left"
+          >
+            <span className="font-display font-bold text-[20px] leading-tight truncate max-w-[75vw]">
+              {profile?.address || t('home.addAddress')}
+            </span>
+            <span className="h-7 w-7 rounded-full bg-base-muted flex items-center justify-center flex-shrink-0 text-ink">
+              <AppIcon path="ui/chevron-abajo" fallback={IconChevronDown} size={16} />
+            </span>
+          </button>
+        </div>
       </header>
 
       {/* Buscador (abre la pantalla de búsqueda) */}
