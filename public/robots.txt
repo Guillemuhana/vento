@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /registro
+Disallow: /cuenta/
+Disallow: /admin/
+Disallow: /comercio/
+Disallow: /repartidor/
+
+Sitemap: https://just-minutes.vercel.app/sitemap.xml
