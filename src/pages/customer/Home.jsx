@@ -91,6 +91,7 @@ export default function Home() {
   const populares = masPopulares(stores)
   const ahorra = ahorraYDisfruta(stores)
   const esHoy = esElDia(PROMO_DEL_DIA.dia)
+  const firstName = profile?.full_name?.trim().split(/\s+/)[0] || ''
 
   return (
     <div className="container-app">
@@ -105,6 +106,9 @@ export default function Home() {
             className="h-9 w-auto max-w-[190px] object-contain"
           />
         </div>
+        <p className="mb-3 font-display text-[22px] font-bold leading-tight text-ink">
+          {t('home.greeting', { name: firstName })}
+        </p>
         <div>
           <p className="text-[13px] text-ink-faint leading-tight">{profile?.city || 'Córdoba'}</p>
           <button

@@ -37,6 +37,7 @@ export default {
   'nav.backToTop': 'Back to top',
 
   'home.addAddress': 'Add your address',
+  'home.greeting': 'Hi, {name}',
   'home.searchPlaceholder': 'Search "{term}"',
   'home.noStores': 'No stores yet',
   'home.noStoresDesc': "As soon as stores join your area, you'll see them here.",
