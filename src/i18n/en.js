@@ -127,6 +127,10 @@ export default {
   'profile.saved': 'Profile updated',
   'profile.saveError': "We couldn't save your changes",
   'profile.missingColumns': 'Saved. Migration 002 is still needed for: {fields}',
+  'profile.imageInvalid': 'Choose an image up to 5 MB.',
+  'profile.imageError': "We couldn't update your picture.",
+  'profile.imageSaved': 'Picture updated',
+  'profile.uploadingImage': 'Uploading picture…',
 
   'search.recent': 'Recent',
   'search.top': 'Most searched',

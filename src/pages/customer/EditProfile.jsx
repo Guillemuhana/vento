@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { supabase } from '../../lib/supabase'
@@ -57,6 +57,8 @@ export default function EditProfile() {
   const { t } = useT()
   const { profile, session, fetchProfile } = useAuthStore()
   const [saving, setSaving] = useState(false)
+  const [uploadingImage, setUploadingImage] = useState(false)
+  const imageInputRef = useRef(null)
 
   const initial = useMemo(() => {
     const parts = (profile?.full_name || '').trim().split(/\s+/)
@@ -120,6 +122,48 @@ export default function EditProfile() {
     }
   }
 
+  const handleImageChange = async (event) => {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (!file || !profile) return
+
+    if (!file.type.startsWith('image/') || file.size > 5 * 1024 * 1024) {
+      toast.error(t('profile.imageInvalid'))
+      return
+    }
+
+    setUploadingImage(true)
+    const extension = file.name.split('.').pop()?.toLowerCase() || 'jpg'
+    const path = `${profile.id}/avatar.${extension}`
+    const { error: uploadError } = await supabase.storage.from('avatars').upload(path, file, {
+      cacheControl: '3600',
+      upsert: true,
+      contentType: file.type,
+    })
+
+    if (uploadError) {
+      setUploadingImage(false)
+      toast.error(t('profile.imageError'))
+      return
+    }
+
+    const { data } = supabase.storage.from('avatars').getPublicUrl(path)
+    const avatarUrl = `${data.publicUrl}?v=${Date.now()}`
+    const { error: profileError } = await supabase
+      .from('profiles')
+      .update({ avatar_url: avatarUrl })
+      .eq('id', profile.id)
+    setUploadingImage(false)
+
+    if (profileError) {
+      toast.error(t('profile.imageError'))
+      return
+    }
+
+    await fetchProfile(profile.id)
+    toast.success(t('profile.imageSaved'))
+  }
+
   const initialsText = (profile?.full_name || '')
     .trim()
     .split(/\s+/)
@@ -142,16 +186,28 @@ export default function EditProfile() {
       </header>
 
       <div className="flex flex-col items-center py-6">
-        <div className="h-[104px] w-[104px] rounded-full bg-base-muted flex items-center justify-center font-display font-bold text-[28px] text-ink-soft">
-          {initialsText || '—'}
+        <div className="h-[104px] w-[104px] rounded-full bg-base-muted overflow-hidden flex items-center justify-center font-display font-bold text-[28px] text-ink-soft">
+          {profile?.avatar_url ? (
+            <img src={profile.avatar_url} alt={profile.full_name} className="h-full w-full object-cover" />
+          ) : (
+            initialsText || '—'
+          )}
         </div>
+        <input
+          ref={imageInputRef}
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="hidden"
+        />
         <button
           type="button"
-          onClick={() => toast(t('common.soon'))}
+          onClick={() => imageInputRef.current?.click()}
+          disabled={uploadingImage}
           className="mt-4 inline-flex items-center gap-2 rounded-full border border-base-line px-5 py-2.5 text-[15px] font-medium text-ink"
         >
           <AppIcon path="ui/camara" fallback={IconCamera} size={17} />
-          {t('profile.editImage')}
+          {uploadingImage ? t('profile.uploadingImage') : t('profile.editImage')}
         </button>
       </div>
 

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useT } from '../../i18n'
 
@@ -6,6 +6,23 @@ import { useT } from '../../i18n'
 export default function PromoCarousel({ banners = [] }) {
   const railRef = useRef(null)
   const [active, setActive] = useState(0)
+
+  useEffect(() => {
+    if (banners.length < 2) return undefined
+
+    const interval = window.setInterval(() => {
+      const rail = railRef.current
+      if (!rail) return
+
+      setActive((current) => {
+        const next = (current + 1) % banners.length
+        rail.scrollTo({ left: next * rail.clientWidth, behavior: 'smooth' })
+        return next
+      })
+    }, 2000)
+
+    return () => window.clearInterval(interval)
+  }, [banners.length])
 
   if (!banners.length) return null
 

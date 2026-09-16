@@ -111,8 +111,12 @@ export default function Account() {
       {/* Bloque superior */}
       <div className="bg-base-muted px-4 pt-6 pb-6">
         <div className="flex items-center gap-3.5 mb-6">
-          <div className="h-[72px] w-[72px] rounded-full bg-base-line flex items-center justify-center font-display font-bold text-[22px] text-ink-soft flex-shrink-0">
-            {initials(profile?.full_name) || '—'}
+          <div className="h-[72px] w-[72px] rounded-full bg-base-line overflow-hidden flex items-center justify-center font-display font-bold text-[22px] text-ink-soft flex-shrink-0">
+            {profile?.avatar_url ? (
+              <img src={profile.avatar_url} alt={profile.full_name} className="h-full w-full object-cover" />
+            ) : (
+              initials(profile?.full_name) || '—'
+            )}
           </div>
           <div className="min-w-0">
             <p className="font-display font-bold text-[22px] leading-tight truncate">

@@ -127,6 +127,10 @@ export default {
   'profile.saved': 'Perfil actualizado',
   'profile.saveError': 'No pudimos guardar los cambios',
   'profile.missingColumns': 'Guardado. Falta correr la migración 002 para: {fields}',
+  'profile.imageInvalid': 'Elegí una imagen de hasta 5 MB.',
+  'profile.imageError': 'No pudimos actualizar tu imagen.',
+  'profile.imageSaved': 'Imagen actualizada',
+  'profile.uploadingImage': 'Subiendo imagen…',
 
   'search.recent': 'Recientes',
   'search.top': 'Los más buscados',
