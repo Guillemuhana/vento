@@ -8,7 +8,7 @@ const hasSupabaseConfig = Boolean(supabaseUrl && supabaseAnonKey)
 if (!hasSupabaseConfig) {
   // eslint-disable-next-line no-console
   console.warn(
-    '[Vento] Faltan las variables VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY. Copiá .env.example a .env y completá tus credenciales de Supabase.'
+    '[Just Minutes] Faltan las variables VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY. Copiá .env.example a .env y completá tus credenciales de Supabase.'
   )
 }
 

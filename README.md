@@ -1,6 +1,6 @@
-# 💨 Vento Delivery
+# ⏱️ Just Minutes
 
-App de delivery completa (estilo Rappi/PedidosYa) construida con **React + Vite + Supabase**, con 3 roles de usuario (cliente, comercio, repartidor) y un panel de administración básico.
+App de delivery para Miami (estilo Rappi/PedidosYa) construida con **React + Vite + Supabase**, con 3 roles de usuario (cliente, comercio, repartidor) y un panel de administración básico.
 
 ## Stack
 

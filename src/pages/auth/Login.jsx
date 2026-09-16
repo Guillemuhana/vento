@@ -29,9 +29,9 @@ export default function Login() {
       <div className="mb-10 text-center">
         <div className="mb-3 flex justify-center">
           <img
-            src="/assets/logo/logovento.png"
-            alt="Vento"
-            className="h-24 w-auto object-contain"
+            src="/assets/logo/just-minutes.png"
+            alt="Just Minutes"
+            className="w-60 max-w-full h-auto object-contain"
           />
         </div>
         <p className="text-sm text-ink-faint">{t('auth.tagline')}</p>
