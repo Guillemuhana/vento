@@ -70,6 +70,7 @@ export default {
 
   'banner.fiorito.title': 'Fiorito',
   'banner.fiorito.subtitle': 'Restaurante argentino · parrilla, pastas y empanadas',
+  'banner.viewProducts': 'Ver productos',
   'banner.desayunos.title': 'Desayunos',
   'banner.desayunos.subtitle': 'por solo $7.000',
   'banner.envio-gratis.title': 'Envío gratis',

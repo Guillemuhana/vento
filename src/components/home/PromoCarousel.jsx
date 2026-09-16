@@ -80,14 +80,25 @@ function Banner({ banner }) {
       </div>
     )
 
+  const bannerContent = (
+    <div className="relative h-full">
+      {content}
+      {banner.to && (
+        <span className="absolute bottom-3 left-3 rounded-full bg-ink/85 px-4 py-2 text-[12px] font-bold text-white shadow-card backdrop-blur-sm">
+          {t('banner.viewProducts')}
+        </span>
+      )}
+    </div>
+  )
+
   return (
     <div className="snap-start flex-shrink-0 w-full px-4">
       {banner.to ? (
         <Link to={banner.to} className="block rounded-2xl overflow-hidden aspect-[16/10] bg-base-muted">
-          {content}
+          {bannerContent}
         </Link>
       ) : (
-        <div className="rounded-2xl overflow-hidden aspect-[16/10] bg-base-muted">{content}</div>
+        <div className="rounded-2xl overflow-hidden aspect-[16/10] bg-base-muted">{bannerContent}</div>
       )}
     </div>
   )
