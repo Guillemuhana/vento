@@ -7,6 +7,7 @@ import Spinner from '../../components/ui/Spinner'
 import { supabase } from '../../lib/supabase'
 import { useAuthStore } from '../../store/useAuthStore'
 import { formatMoney } from '../../utils/format'
+import LocalValueBanner from '../../components/ui/LocalValueBanner'
 
 // Comisión de referencia que ve el repartidor por entrega (se podría calcular server-side).
 const COURIER_EARNING_RATE = 0.7
@@ -92,6 +93,8 @@ export default function AvailableOrders() {
           </button>
         }
       />
+
+      <LocalValueBanner role="courier" />
 
       {!courier?.is_available ? (
         <EmptyState

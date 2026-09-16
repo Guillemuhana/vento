@@ -22,6 +22,12 @@ export default {
   'common.other': 'Other',
   'common.clearField': 'Clear {field}',
 
+  'localValue.eyebrow': 'Vento Miami',
+  'localValue.courierTitle': 'Your work and earnings come first',
+  'localValue.courierText': "We are a local Miami app. Our goal is to charge about half of Uber or Rappi's commission so more value stays with every delivery.",
+  'localValue.storeTitle': 'More margin for your business',
+  'localValue.storeText': "Vento was built in Miami to work closely with local stores. Our proposal is to charge about half of Uber or Rappi's commission and help you sell with more margin.",
+
   'nav.home': 'Home',
   'nav.offers': 'Offers',
   'nav.favorites': 'Favorites',

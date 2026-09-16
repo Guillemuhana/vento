@@ -6,6 +6,7 @@ import Spinner from '../../components/ui/Spinner'
 import { supabase } from '../../lib/supabase'
 import { useAuthStore } from '../../store/useAuthStore'
 import { formatMoney } from '../../utils/format'
+import LocalValueBanner from '../../components/ui/LocalValueBanner'
 
 export default function Dashboard() {
   const session = useAuthStore((s) => s.session)
@@ -82,6 +83,8 @@ export default function Dashboard() {
           </button>
         }
       />
+
+      <LocalValueBanner role="store" />
 
       <div className="px-4 py-4 grid grid-cols-3 gap-2">
         <div className="card p-3 text-center">

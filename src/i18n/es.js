@@ -22,6 +22,12 @@ export default {
   'common.other': 'Otros',
   'common.clearField': 'Borrar {field}',
 
+  'localValue.eyebrow': 'Vento Miami',
+  'localValue.courierTitle': 'Tu trabajo y tu ganancia son prioridad',
+  'localValue.courierText': 'Somos una app local de Miami. Nuestra meta es cobrar cerca de la mitad de la comisión de Uber o Rappi para que más valor quede en cada entrega.',
+  'localValue.storeTitle': 'Más margen para tu negocio',
+  'localValue.storeText': 'Vento nació en Miami para trabajar cerca de los comercios. Nuestra propuesta es cobrar cerca de la mitad de la comisión de Uber o Rappi y ayudarte a vender con más margen.',
+
   'nav.home': 'Inicio',
   'nav.offers': 'Ofertas',
   'nav.favorites': 'Favoritos',
