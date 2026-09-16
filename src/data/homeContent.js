@@ -59,6 +59,8 @@ export const BANNERS = [
     subtitleKey: 'banner.fiorito.subtitle',
     bg: 'bg-tile-peach',
     storeName: 'Fiorito',
+    sponsored: true,
+    adPriority: 100,
   },
   {
     id: 'fiorito-carne',
@@ -67,6 +69,8 @@ export const BANNERS = [
     subtitleKey: 'banner.fioritoCarne.subtitle',
     bg: 'bg-tile-peach',
     storeName: 'Fiorito',
+    sponsored: true,
+    adPriority: 90,
   },
   {
     id: 'fiorito-milanesa',
@@ -75,6 +79,8 @@ export const BANNERS = [
     subtitleKey: 'banner.fioritoMilanesa.subtitle',
     bg: 'bg-tile-peach',
     storeName: 'Fiorito',
+    sponsored: true,
+    adPriority: 80,
   },
   {
     id: 'fiorito-parrilla',
@@ -83,6 +89,8 @@ export const BANNERS = [
     subtitleKey: 'banner.fioritoParrilla.subtitle',
     bg: 'bg-tile-peach',
     storeName: 'Fiorito',
+    sponsored: true,
+    adPriority: 70,
   },
   {
     id: 'fiorito-pulpo',
@@ -91,6 +99,8 @@ export const BANNERS = [
     subtitleKey: 'banner.fioritoPulpo.subtitle',
     bg: 'bg-tile-peach',
     storeName: 'Fiorito',
+    sponsored: true,
+    adPriority: 60,
   },
   {
     id: 'fiorito-ribeye',

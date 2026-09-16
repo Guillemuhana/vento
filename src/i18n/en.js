@@ -71,6 +71,7 @@ export default {
   'banner.fiorito.title': 'Fiorito',
   'banner.fiorito.subtitle': 'Argentine restaurant · grill, pasta and empanadas',
   'banner.viewProducts': 'View products',
+  'banner.sponsored': 'Featured ad',
   'banner.desayunos.title': 'Breakfast',
   'banner.desayunos.subtitle': 'for only $7,000',
   'banner.envio-gratis.title': 'Free delivery',

@@ -77,7 +77,7 @@ export default function Home() {
   // Los banners con `storeName` enlazan a la ficha de ese comercio.
   const banners = useMemo(
     () =>
-      BANNERS.map((banner) => {
+      [...BANNERS].sort((a, b) => (b.adPriority || 0) - (a.adPriority || 0)).map((banner) => {
         if (!banner.storeName) return banner
         const comercio = stores.find((s) => s.name === banner.storeName)
         return comercio ? { ...banner, to: `/comercio/${comercio.id}` } : banner

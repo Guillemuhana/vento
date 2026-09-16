@@ -83,6 +83,11 @@ function Banner({ banner }) {
   const bannerContent = (
     <div className="relative h-full">
       {content}
+      {banner.sponsored && (
+        <span className="absolute right-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-ink shadow-card">
+          {t('banner.sponsored')}
+        </span>
+      )}
       {banner.to && (
         <span className="absolute bottom-3 left-3 rounded-full bg-ink/85 px-4 py-2 text-[12px] font-bold text-white shadow-card backdrop-blur-sm">
           {t('banner.viewProducts')}
