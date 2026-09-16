@@ -1,4 +1,4 @@
-# Vento — Spec visual (referencia: Rappi AR 8.39)
+# Just Minutes — Spec visual (referencia: Rappi AR 8.39)
 
 Documento de referencia para el rediseño del lado cliente. Se armó a partir de 8 capturas
 de la app de Rappi que pasó Guillermo. Las imágenes finales (ilustraciones de categorías,
@@ -85,7 +85,7 @@ De arriba a abajo:
    cuadrados blancos con ícono line grande arriba y label abajo.
 2. Lista sobre fondo blanco, agrupada por secciones con heading bold 24px:
    - **Beneficios**: Créditos (con monto a la derecha), Cupones ›, Loyalty ›
-   - **Mi cuenta**: RappiPro/Vento Pro ›, Direcciones ›, Métodos de pago ›, Datos de
+   - **Mi cuenta**: Just Minutes Pro ›, Direcciones ›, Métodos de pago ›, Datos de
      facturación ›, Ayuda ›
    - **Configuración**: Idioma ›, Notificaciones ›
    - **Más información**: Quiero ser Aliado ›, Términos y Condiciones ›, Política de Privacidad ›

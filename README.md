@@ -70,16 +70,23 @@ El orden, si hay que rearmar la base desde cero (o pegá directo
    repartidor, según el rol) con un trigger sobre `auth.users`. Sin esto el registro
    queda a medias cuando la confirmación de email está activada.
 
-## Subir a GitHub
+## GitHub y despliegue
 
-El repo ya está inicializado y commiteado localmente con el remoto apuntando a `https://github.com/Guillemuhana/vento.git`. Yo no tengo forma de autenticarme como vos en GitHub, así que el push lo hacés vos:
+El remoto es `https://github.com/Guillemuhana/vento.git` — el repo conserva el
+nombre viejo, renombrarlo rompería el enlace con Vercel. El push ya funciona con
+las credenciales cacheadas de la máquina:
 
 ```bash
 cd delivery-app
-git push -u origin main
+git push origin main
 ```
 
-Si te pide credenciales, usá un Personal Access Token de GitHub como contraseña (o logueate con la extensión de GitHub en VS Code antes de pushear).
+Vercel está conectado a ese repo y despliega solo en cada push a `main`
+(https://vento-phi.vercel.app). Las variables `VITE_SUPABASE_URL` y
+`VITE_SUPABASE_ANON_KEY` se configuran en Vercel, no en el repo.
+
+> Vite compila las variables dentro del bundle: cambiarlas en Vercel no hace
+> nada hasta que se redeploye.
 
 ## Instalación
 

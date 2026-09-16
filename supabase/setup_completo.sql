@@ -1,11 +1,11 @@
 -- ============================================================================
--- VENTO — Setup completo de la base.
+-- JUST MINUTES — Setup completo de la base.
 -- Pegar TODO esto en el SQL Editor de Supabase y ejecutar una sola vez.
 -- Generado a partir de schema.sql + migrations 002, 003 y 004
 -- ============================================================================
 
 -- ============================================================================
--- VENTO DELIVERY — Esquema de base de datos (Supabase / Postgres)
+-- JUST MINUTES — Esquema de base de datos (Supabase / Postgres)
 -- Ejecutar en el SQL Editor de tu proyecto de Supabase, en este orden.
 -- ============================================================================
 

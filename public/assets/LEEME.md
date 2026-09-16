@@ -8,7 +8,7 @@ nunca se rompe.
 | `categorias/` | ✅ ilustraciones de las categorías del home (ya cargadas) |
 | `iconos/` | íconos de la interfaz → ver `iconos/LEEME.md` |
 | `banners/` | banners de promos del home ⟵ falta |
-| `logo/` | logo de Vento |
+| `logo/` | logo de Just Minutes |
 
 ## Categorías — `categorias/` ✅
 

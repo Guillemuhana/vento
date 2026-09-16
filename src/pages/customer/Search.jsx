@@ -8,7 +8,7 @@ import AppIcon from '../../components/ui/AppIcon'
 import { TOP_SEARCHES } from '../../data/homeContent'
 import { useT } from '../../i18n'
 
-const RECENTS_KEY = 'vento-recent-searches'
+const RECENTS_KEY = 'just-minutes-recent-searches'
 
 function readRecents() {
   try {

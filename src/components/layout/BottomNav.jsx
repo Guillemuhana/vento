@@ -62,7 +62,7 @@ export default function BottomNav() {
                       {/* Indicador que se desliza de un tab al otro */}
                       {isActive && (
                         <motion.span
-                          layoutId="vento-nav-activo"
+                          layoutId="jm-nav-activo"
                           transition={spring}
                           className="absolute inset-0 rounded-full bg-white/80 shadow-[0_1px_3px_rgba(16,24,40,0.10)]"
                         />

@@ -1,5 +1,5 @@
 -- ============================================================================
--- VENTO DELIVERY — Esquema de base de datos (Supabase / Postgres)
+-- JUST MINUTES — Esquema de base de datos (Supabase / Postgres)
 -- Ejecutar en el SQL Editor de tu proyecto de Supabase, en este orden.
 -- ============================================================================
 

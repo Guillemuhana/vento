@@ -14,7 +14,7 @@ export const LANGUAGES = [
 ]
 
 const DICCIONARIOS = { en, es }
-const STORAGE_KEY = 'vento-lang'
+const STORAGE_KEY = 'just-minutes-lang'
 const POR_DEFECTO = 'en'
 
 const I18nContext = createContext(null)

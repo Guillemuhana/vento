@@ -22,6 +22,6 @@ export const useFavoritesStore = create(
 
       clear: () => set({ ids: [] }),
     }),
-    { name: 'vento-favorites' }
+    { name: 'just-minutes-favorites' }
   )
 )
