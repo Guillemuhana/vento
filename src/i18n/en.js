@@ -174,6 +174,7 @@ export default {
   'checkout.address': 'Delivery address',
   'checkout.addressPlaceholder': 'Street, number, floor/apt, landmarks…',
   'checkout.payment': 'Payment method',
+  'checkout.paymentHint': 'In Miami you can pay with cash, a credit or debit card, or a digital wallet.',
   'checkout.notes': 'Notes for the courier (optional)',
   'checkout.notesPlaceholder': 'E.g. doorbell is broken, leave at the front desk…',
   'checkout.summary': 'Summary — {store}',
@@ -184,8 +185,8 @@ export default {
   'checkout.error': "We couldn't create your order",
 
   'pay.efectivo': 'Cash',
-  'pay.tarjeta': 'Saved card',
-  'pay.mercadopago': 'MercadoPago',
+  'pay.tarjeta': 'Credit or debit card',
+  'pay.billetera': 'Apple Pay or Google Pay',
 
   'orders.title': 'My orders',
   'orders.emptyTitle': "You haven't ordered yet",

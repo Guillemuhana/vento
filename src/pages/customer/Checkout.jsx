@@ -15,7 +15,7 @@ const DELIVERY_FEE = 3.99
 const PAYMENT_METHODS = [
   { value: 'efectivo', icon: '💵' },
   { value: 'tarjeta', icon: '💳' },
-  { value: 'mercadopago', icon: '📲' },
+  { value: 'billetera', icon: '📱' },
 ]
 
 export default function Checkout() {
@@ -94,6 +94,7 @@ export default function Checkout() {
 
         <section>
           <h3 className="font-semibold text-sm mb-2">{t('checkout.payment')}</h3>
+          <p className="text-xs text-ink-faint mb-2">{t('checkout.paymentHint')}</p>
           <div className="space-y-2">
             {PAYMENT_METHODS.map((m) => (
               <button

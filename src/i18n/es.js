@@ -174,6 +174,7 @@ export default {
   'checkout.address': 'Dirección de entrega',
   'checkout.addressPlaceholder': 'Calle, número, piso/depto, referencias…',
   'checkout.payment': 'Método de pago',
+  'checkout.paymentHint': 'En Miami podés pagar en efectivo, con tarjeta de crédito o débito, o con billetera digital.',
   'checkout.notes': 'Notas para el repartidor (opcional)',
   'checkout.notesPlaceholder': 'Ej: timbre no funciona, dejar en portería…',
   'checkout.summary': 'Resumen — {store}',
@@ -184,8 +185,8 @@ export default {
   'checkout.error': 'No pudimos crear el pedido',
 
   'pay.efectivo': 'Efectivo',
-  'pay.tarjeta': 'Tarjeta guardada',
-  'pay.mercadopago': 'MercadoPago',
+  'pay.tarjeta': 'Tarjeta de crédito o débito',
+  'pay.billetera': 'Apple Pay o Google Pay',
 
   'orders.title': 'Mis pedidos',
   'orders.emptyTitle': 'Todavía no hiciste pedidos',

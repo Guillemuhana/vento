@@ -141,7 +141,7 @@ export default function ActiveDelivery() {
           ))}
           <p className="text-sm font-bold mt-2 pt-2 border-t border-base-line">
             Cobrar:{' '}
-            {order.payment_method === 'efectivo' ? formatMoney(order.total) : 'Ya pago (online)'}
+            {order.payment_method === 'efectivo' ? formatMoney(order.total) : 'Pago digital seleccionado'}
           </p>
         </div>
 
