@@ -8,6 +8,7 @@ import Spinner from '../../components/ui/Spinner'
 import { useCartStore } from '../../store/useCartStore'
 import { useT } from '../../i18n'
 import { getFioritoProductImage, getFioritoStoreImage } from '../../data/fioritoImages'
+import { getStoreImage } from '../../data/storeImages'
 
 export default function StoreDetail() {
   const { id } = useParams()
@@ -67,9 +68,9 @@ export default function StoreDetail() {
     <div className="container-app">
       <Navbar title={store.name} back />
       <div className="h-32 bg-base-muted flex items-center justify-center text-5xl">
-        {store.cover_url || store.logo_url || getFioritoStoreImage(store.name) ? (
+        {store.cover_url || store.logo_url || getFioritoStoreImage(store.name) || getStoreImage(store.name) ? (
           <img
-            src={store.cover_url || store.logo_url || getFioritoStoreImage(store.name)}
+            src={store.cover_url || store.logo_url || getFioritoStoreImage(store.name) || getStoreImage(store.name)}
             alt={store.name}
             className="h-full w-full object-cover"
           />

@@ -3,6 +3,7 @@ import { useFavoritesStore } from '../../store/useFavoritesStore'
 import { IconHeart, IconHeartSolid, IconStar, IconBolt } from '../ui/Icon'
 import AppIcon from '../ui/AppIcon'
 import { useT } from '../../i18n'
+import { getStoreImage } from '../../data/storeImages'
 import { getFioritoStoreImage } from '../../data/fioritoImages'
 
 // Card de comercio con foto 16:9, badge de promo y fila de metadatos.
@@ -14,7 +15,7 @@ export default function StoreCard({ store, variant = 'rail' }) {
   const isFavorite = useFavoritesStore((s) => s.ids.includes(store.id))
   const toggleFavorite = useFavoritesStore((s) => s.toggle)
 
-  const image = store.cover_url || store.logo_url || getFioritoStoreImage(store.name)
+  const image = store.cover_url || store.logo_url || getFioritoStoreImage(store.name) || getStoreImage(store.name)
   const eta = store.eta_minutes || 25
   const closed = store.is_open === false
 
