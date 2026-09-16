@@ -26,6 +26,8 @@ const FIORITO_PRODUCTS = {
   'Gnocchi Estofado': 'https://tb-static.uber.com/prod/image-proc/processed_images/0e8ea040652c2116fa600eddaa0810cb/a19bb09692310dfd41e49a96c424b3a6.jpeg',
   'Red Beets Salad': 'https://tb-static.uber.com/prod/image-proc/processed_images/c1731e06a01868385ced8c458a00914e/a19bb09692310dfd41e49a96c424b3a6.jpeg',
   'Empanada de Choclo': 'https://tb-static.uber.com/prod/image-proc/processed_images/dc482a6ea68da2bb20c4956dabe3eac/a19bb09692310dfd41e49a96c424b3a6.jpeg',
+  'Empanada de Carne a Cuchillo': 'https://tb-static.uber.com/prod/image-proc/processed_images/6b50794b4a776bc7bd336013f73f1458/a19bb09692310dfd41e49a96c424b3a6.jpeg',
+  Panqueque: 'https://tb-static.uber.com/prod/image-proc/processed_images/384982d20c90ce05551ea6d0a7f24346/fb86662148be855d931b37d6c1e5fcbe.jpeg',
   Provoleta: 'https://tb-static.uber.com/prod/image-proc/processed_images/3183a717f8f43e348871841c5b616302/a19bb09692310dfd41e49a96c424b3a6.jpeg',
   'Pulpo a la Plancha': 'https://tb-static.uber.com/prod/image-proc/processed_images/2258a580e5c0add16325435873a1ee82/a19bb09692310dfd41e49a96c424b3a6.jpeg',
 }
