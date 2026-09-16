@@ -5,6 +5,8 @@ import Spinner from '../../components/ui/Spinner'
 import EmptyState from '../../components/ui/EmptyState'
 import ScrollTopPill from '../../components/layout/ScrollTopPill'
 import { useT } from '../../i18n'
+import BuildingPromotion from '../../components/home/BuildingPromotion'
+import { NEO_LOFTS_PROMOTION } from '../../data/buildingPromotions'
 
 export default function Offers() {
   const { t } = useT()
@@ -33,6 +35,8 @@ export default function Offers() {
       <ScrollTopPill />
 
       <h1 className="screen-title text-[#0A84FF] px-4 pt-5 pb-6">{t('offers.title')}</h1>
+
+      <BuildingPromotion building={NEO_LOFTS_PROMOTION} />
 
       {loading && <Spinner className="py-10" />}
 

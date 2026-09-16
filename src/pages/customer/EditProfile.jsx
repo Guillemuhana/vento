@@ -52,6 +52,27 @@ function Field({ label, value, onChange, placeholder, type = 'text', disabled, h
   )
 }
 
+function compressImage(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => {
+      const image = new Image()
+      image.onload = () => {
+        const scale = Math.min(1, 512 / Math.max(image.width, image.height))
+        const canvas = document.createElement('canvas')
+        canvas.width = Math.max(1, Math.round(image.width * scale))
+        canvas.height = Math.max(1, Math.round(image.height * scale))
+        canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height)
+        resolve(canvas.toDataURL('image/jpeg', 0.82))
+      }
+      image.onerror = reject
+      image.src = reader.result
+    }
+    reader.onerror = reject
+    reader.readAsDataURL(file)
+  })
+}
+
 export default function EditProfile() {
   const navigate = useNavigate()
   const { t } = useT()
@@ -141,18 +162,34 @@ export default function EditProfile() {
       contentType: file.type,
     })
 
-    if (uploadError) {
-      setUploadingImage(false)
-      toast.error(t('profile.imageError'))
-      return
+    let avatarUrl
+    if (!uploadError) {
+      const { data } = supabase.storage.from('avatars').getPublicUrl(path)
+      avatarUrl = `${data.publicUrl}?v=${Date.now()}`
+    } else {
+      try {
+        avatarUrl = await compressImage(file)
+      } catch {
+        setUploadingImage(false)
+        toast.error(t('profile.imageError'))
+        return
+      }
     }
 
-    const { data } = supabase.storage.from('avatars').getPublicUrl(path)
-    const avatarUrl = `${data.publicUrl}?v=${Date.now()}`
-    const { error: profileError } = await supabase
+    let { error: profileError } = await supabase
       .from('profiles')
       .update({ avatar_url: avatarUrl })
       .eq('id', profile.id)
+
+    if (profileError && !uploadError) {
+      try {
+        avatarUrl = await compressImage(file)
+        const result = await supabase.from('profiles').update({ avatar_url: avatarUrl }).eq('id', profile.id)
+        profileError = result.error
+      } catch {
+        profileError = { message: 'avatar fallback failed' }
+      }
+    }
     setUploadingImage(false)
 
     if (profileError) {
