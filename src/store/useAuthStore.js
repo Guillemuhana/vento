@@ -35,39 +35,23 @@ export const useAuthStore = create((set, get) => ({
     return data
   },
 
+  // El perfil (y el comercio / registro de repartidor según el rol) lo crea un
+  // trigger en la base a partir de estos metadatos: ver la migración 004.
+  // Hacerlo desde acá fallaba cuando el signUp no devuelve sesión, que es lo que
+  // pasa con la confirmación de email activada.
   signUp: async ({ email, password, fullName, phone, role }) => {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { full_name: fullName } },
+      options: {
+        data: {
+          full_name: fullName,
+          phone,
+          role: role || 'cliente',
+        },
+      },
     })
     if (error) throw error
-
-    if (data.user) {
-      const { error: profileError } = await supabase.from('profiles').insert({
-        id: data.user.id,
-        full_name: fullName,
-        phone,
-        role: role || 'cliente',
-      })
-      if (profileError) throw profileError
-
-      if (role === 'comercio') {
-        await supabase.from('stores').insert({
-          owner_id: data.user.id,
-          name: `Comercio de ${fullName}`,
-          category: 'general',
-          is_open: false,
-        })
-      }
-      if (role === 'repartidor') {
-        await supabase.from('couriers').insert({
-          user_id: data.user.id,
-          vehicle_type: 'moto',
-          is_available: false,
-        })
-      }
-    }
     return data
   },
 

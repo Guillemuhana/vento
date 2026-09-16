@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import Navbar from '../../components/layout/Navbar'
 import Spinner from '../../components/ui/Spinner'
+import DeliveryMap from '../../components/order/DeliveryMap'
 import { supabase } from '../../lib/supabase'
 import { useAuthStore } from '../../store/useAuthStore'
 import { formatMoney } from '../../utils/format'
+import { distanciaKm } from '../../utils/geo'
 
 export default function ActiveDelivery() {
   const { id } = useParams()
@@ -15,6 +16,8 @@ export default function ActiveDelivery() {
   const [order, setOrder] = useState(null)
   const [loading, setLoading] = useState(true)
   const [coords, setCoords] = useState(null)
+  const [gpsError, setGpsError] = useState(null)
+  const courierIdRef = useRef(null)
 
   useEffect(() => {
     async function load() {
@@ -29,36 +32,53 @@ export default function ActiveDelivery() {
     load()
   }, [id])
 
-  // Simula el envío periódico de ubicación del repartidor a Supabase (courier_locations / couriers).
+  // Ubicación en vivo: se guarda en `couriers` para que el cliente la vea en su
+  // pantalla de seguimiento (que escucha esa tabla por Realtime).
   useEffect(() => {
-    if (!navigator.geolocation) return
-    const watchId = navigator.geolocation.watchPosition(
-      async (pos) => {
-        const { latitude, longitude } = pos.coords
-        setCoords({ lat: latitude, lng: longitude })
-        const { data: courier } = await supabase
-          .from('couriers')
-          .select('id')
-          .eq('user_id', session.user.id)
-          .single()
-        if (courier) {
+    if (!session?.user?.id) return
+    if (!navigator.geolocation) {
+      setGpsError('Este dispositivo no comparte ubicación')
+      return
+    }
+
+    let cancelado = false
+
+    async function iniciar() {
+      // El id del repartidor se busca una sola vez, no en cada actualización.
+      const { data: courier } = await supabase
+        .from('couriers')
+        .select('id')
+        .eq('user_id', session.user.id)
+        .single()
+      if (!courier || cancelado) return
+      courierIdRef.current = courier.id
+
+      const watchId = navigator.geolocation.watchPosition(
+        async (pos) => {
+          const { latitude, longitude } = pos.coords
+          setCoords({ lat: latitude, lng: longitude })
+          setGpsError(null)
           await supabase
             .from('couriers')
             .update({ current_lat: latitude, current_lng: longitude })
-            .eq('id', courier.id)
-        }
-      },
-      () => {},
-      { enableHighAccuracy: true }
-    )
-    return () => navigator.geolocation.clearWatch(watchId)
-  }, [session])
+            .eq('id', courierIdRef.current)
+        },
+        () => setGpsError('No pudimos acceder a tu ubicación. Revisá los permisos.'),
+        { enableHighAccuracy: true, maximumAge: 10000 }
+      )
+
+      return () => navigator.geolocation.clearWatch(watchId)
+    }
+
+    const limpieza = iniciar()
+    return () => {
+      cancelado = true
+      limpieza.then((fn) => fn && fn())
+    }
+  }, [session?.user?.id])
 
   async function markDelivered() {
-    const { error } = await supabase
-      .from('orders')
-      .update({ status: 'entregado' })
-      .eq('id', id)
+    const { error } = await supabase.from('orders').update({ status: 'entregado' }).eq('id', id)
     if (error) {
       toast.error('No se pudo confirmar la entrega')
     } else {
@@ -70,21 +90,32 @@ export default function ActiveDelivery() {
   if (loading) return <Spinner className="py-20" />
   if (!order) return null
 
+  const storePos =
+    order.stores?.lat != null && order.stores?.lng != null
+      ? { lat: order.stores.lat, lng: order.stores.lng, label: order.stores.name }
+      : null
+  const miPos = coords ? { ...coords, label: 'Vos' } : null
+  const km = miPos && storePos ? distanciaKm(miPos, storePos) : null
+
   return (
     <div className="container-app">
       <Navbar title="Entrega activa" back />
 
-      {coords && (
-        <div className="h-48">
-          <MapContainer center={[coords.lat, coords.lng]} zoom={14} className="h-full w-full" scrollWheelZoom={false}>
-            <TileLayer
-              attribution='&copy; OpenStreetMap contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={[coords.lat, coords.lng]}>
-              <Popup>Tu ubicación</Popup>
-            </Marker>
-          </MapContainer>
+      {(miPos || storePos) && (
+        <div className="px-4 pb-1">
+          <DeliveryMap
+            courier={miPos}
+            store={storePos}
+            height="h-72"
+            className="rounded-2xl border border-base-line"
+          />
+          <p className="text-[13px] text-ink-faint mt-2 text-center">
+            {gpsError
+              ? gpsError
+              : miPos
+                ? `Compartiendo tu ubicación${km != null ? ` · a ${km.toFixed(1)} km del comercio` : ''}`
+                : 'Buscando tu ubicación…'}
+          </p>
         </div>
       )}
 
@@ -109,7 +140,8 @@ export default function ActiveDelivery() {
             </p>
           ))}
           <p className="text-sm font-bold mt-2 pt-2 border-t border-base-line">
-            Cobrar: {order.payment_method === 'efectivo' ? formatMoney(order.total) : 'Ya pago (online)'}
+            Cobrar:{' '}
+            {order.payment_method === 'efectivo' ? formatMoney(order.total) : 'Ya pago (online)'}
           </p>
         </div>
 
@@ -119,7 +151,9 @@ export default function ActiveDelivery() {
           </button>
         )}
         {order.status === 'entregado' && (
-          <div className="text-center text-sm font-semibold text-teal-600 py-3">Entrega completada ✅</div>
+          <div className="text-center text-sm font-semibold text-teal-600 py-3">
+            Entrega completada
+          </div>
         )}
       </div>
     </div>

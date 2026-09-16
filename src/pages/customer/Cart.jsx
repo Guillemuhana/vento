@@ -3,22 +3,24 @@ import Navbar from '../../components/layout/Navbar'
 import EmptyState from '../../components/ui/EmptyState'
 import { useCartStore } from '../../store/useCartStore'
 import { formatMoney } from '../../utils/format'
+import { useT } from '../../i18n'
 
 export default function Cart() {
   const navigate = useNavigate()
+  const { t } = useT()
   const { items, storeName, updateQuantity, removeItem, subtotal } = useCartStore()
 
   if (items.length === 0) {
     return (
       <div className="container-app">
-        <Navbar title="Carrito" />
+        <Navbar title={t('cart.title')} />
         <EmptyState
           icon="🛒"
-          title="Tu carrito está vacío"
-          description="Explorá comercios y agregá productos para empezar tu pedido."
+          title={t('cart.emptyTitle')}
+          description={t('cart.emptyDesc')}
           action={
             <button onClick={() => navigate('/')} className="btn-primary">
-              Ver comercios
+              {t('cart.browse')}
             </button>
           }
         />
@@ -28,9 +30,9 @@ export default function Cart() {
 
   return (
     <div className="container-app">
-      <Navbar title="Carrito" />
+      <Navbar title={t('cart.title')} />
       <div className="px-4 py-3">
-        <p className="text-xs text-ink-faint mb-3">Pedido de {storeName}</p>
+        <p className="text-xs text-ink-faint mb-3">{t('cart.orderFrom', { store: storeName })}</p>
         <div className="space-y-2">
           {items.map((item) => (
             <div key={`${item.productId}-${item.notes}`} className="card p-3 flex items-center gap-3">
@@ -62,11 +64,11 @@ export default function Cart() {
       <div className="fixed bottom-16 left-0 right-0 px-4">
         <div className="max-w-md md:max-w-lg mx-auto card p-4 flex items-center justify-between">
           <div>
-            <p className="text-xs text-ink-faint">Subtotal</p>
+            <p className="text-xs text-ink-faint">{t('common.subtotal')}</p>
             <p className="font-bold">{formatMoney(subtotal())}</p>
           </div>
           <button onClick={() => navigate('/checkout')} className="btn-accent">
-            Continuar
+            {t('common.continue')}
           </button>
         </div>
       </div>

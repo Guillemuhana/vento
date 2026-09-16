@@ -15,7 +15,12 @@ import Cart from './pages/customer/Cart'
 import Checkout from './pages/customer/Checkout'
 import OrderTracking from './pages/customer/OrderTracking'
 import OrderHistory from './pages/customer/OrderHistory'
-import Profile from './pages/customer/Profile'
+import Account from './pages/customer/Account'
+import EditProfile from './pages/customer/EditProfile'
+import Offers from './pages/customer/Offers'
+import Favorites from './pages/customer/Favorites'
+import Search from './pages/customer/Search'
+import CategoryStores from './pages/customer/CategoryStores'
 
 import StoreDashboard from './pages/store-owner/Dashboard'
 import StoreProducts from './pages/store-owner/Products'
@@ -121,15 +126,62 @@ export default function App() {
           }
         />
         <Route
-          path="/perfil"
+          path="/ofertas"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute roles={['cliente']}>
               <CustomerLayout>
-                <Profile />
+                <Offers />
               </CustomerLayout>
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/favoritos"
+          element={
+            <ProtectedRoute roles={['cliente']}>
+              <CustomerLayout>
+                <Favorites />
+              </CustomerLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/categoria/:slug"
+          element={
+            <ProtectedRoute roles={['cliente']}>
+              <CustomerLayout>
+                <CategoryStores />
+              </CustomerLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/buscar"
+          element={
+            <ProtectedRoute roles={['cliente']}>
+              <Search />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/cuenta"
+          element={
+            <ProtectedRoute>
+              <CustomerLayout>
+                <Account />
+              </CustomerLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/cuenta/perfil"
+          element={
+            <ProtectedRoute>
+              <EditProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/perfil" element={<Navigate to="/cuenta" replace />} />
 
         {/* Comercio */}
         <Route

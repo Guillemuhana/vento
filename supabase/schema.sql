@@ -143,13 +143,17 @@ create table reviews (
 -- ----------------------------------------------------------------------------
 -- Trigger: updated_at automático en orders
 -- ----------------------------------------------------------------------------
-create or replace function set_updated_at()
-returns trigger as $$
+-- search_path fijo: lo pide el linter de seguridad de Supabase.
+create or replace function public.set_updated_at()
+returns trigger
+language plpgsql
+set search_path = ''
+as $$
 begin
   new.updated_at = now();
   return new;
 end;
-$$ language plpgsql;
+$$;
 
 create trigger trg_orders_updated_at
   before update on orders
@@ -167,12 +171,16 @@ alter table order_items enable row level security;
 alter table reviews enable row level security;
 
 -- Helper: rol del usuario autenticado actual
-create or replace function current_role_is(target_role user_role)
-returns boolean as $$
+create or replace function public.current_role_is(target_role public.user_role)
+returns boolean
+language sql
+stable
+set search_path = ''
+as $$
   select exists (
-    select 1 from profiles where id = auth.uid() and role = target_role
+    select 1 from public.profiles where id = auth.uid() and role = target_role
   );
-$$ language sql stable;
+$$;
 
 -- ---- profiles ----
 create policy "Perfil visible para el propio usuario" on profiles

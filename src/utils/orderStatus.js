@@ -8,15 +8,8 @@ export const ORDER_STATUS_FLOW = [
   'entregado',
 ]
 
-export const ORDER_STATUS_LABEL = {
-  pendiente: 'Esperando confirmación del comercio',
-  aceptado: 'Comercio confirmó tu pedido',
-  preparando: 'Están preparando tu pedido',
-  listo_para_retirar: 'Listo, esperando repartidor',
-  en_camino: 'Tu pedido va en camino',
-  entregado: 'Pedido entregado',
-  cancelado: 'Pedido cancelado',
-}
+// Los textos de cada estado viven en los diccionarios de idioma, con la clave
+// `status.<estado>`. Acá queda solo el flujo y el color.
 
 export const ORDER_STATUS_COLOR = {
   pendiente: 'bg-mango-100 text-mango-700',
