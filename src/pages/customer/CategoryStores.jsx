@@ -64,7 +64,7 @@ export default function CategoryStores() {
         />
       )}
 
-      <div className="px-4 space-y-5">
+      <div className="px-4 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {stores.map((store) => (
           <StoreCard key={store.id} store={store} variant="list" />
         ))}

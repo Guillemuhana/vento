@@ -69,7 +69,7 @@ export default function Search() {
   }
 
   return (
-    <div className="max-w-md md:max-w-lg mx-auto min-h-screen bg-base pb-32">
+    <div className="ancho-app min-h-screen bg-base pb-32">
       {/* Comercios vistos recientemente */}
       {!term && stores.length > 0 && (
         <div className="rail px-4 pt-5 pb-6">
@@ -125,22 +125,24 @@ export default function Search() {
       )}
 
       {term && (
-        <section className="px-4 pt-5 space-y-5">
+        <section className="px-4 pt-5">
           {loading && <Spinner className="py-10" />}
           {!loading && results.length === 0 && (
             <p className="text-center text-[14px] text-ink-faint py-10">
               {t('search.noResults', { term: query })}
             </p>
           )}
-          {results.map((store) => (
-            <StoreCard key={store.id} store={store} variant="list" />
-          ))}
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {results.map((store) => (
+              <StoreCard key={store.id} store={store} variant="list" />
+            ))}
+          </div>
         </section>
       )}
 
       {/* Input abajo */}
       <div className="fixed bottom-0 left-0 right-0 z-40">
-        <div className="max-w-md md:max-w-lg mx-auto bg-base px-3 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] flex items-center gap-2 border-t border-base-line">
+        <div className="ancho-app bg-base px-3 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] flex items-center gap-2 border-t border-base-line">
           <div className="flex-1 h-12 rounded-full bg-base-muted flex items-center gap-2 px-4">
             <AppIcon path="ui/buscar" fallback={IconSearch} size={20} className="text-ink-faint flex-shrink-0" />
             <input

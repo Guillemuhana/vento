@@ -40,7 +40,7 @@ export default function BottomNav() {
     // reducedMotion="user" respeta a quien tenga las animaciones desactivadas en el sistema.
     <MotionConfig reducedMotion="user">
       <div className="fixed bottom-0 left-0 right-0 z-40 pointer-events-none">
-        <div className="max-w-md md:max-w-lg mx-auto px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))]">
+        <div className="ancho-app px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))]">
           <CartBar />
 
           <div className="flex items-center gap-2.5 pointer-events-auto">

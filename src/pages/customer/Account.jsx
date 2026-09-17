@@ -212,7 +212,7 @@ function LanguageSheet({ open, onClose, lang, setLang, title }) {
             transition={{ type: 'spring', stiffness: 380, damping: 34 }}
             className="fixed bottom-0 left-0 right-0 z-50"
           >
-            <div className="max-w-md md:max-w-lg mx-auto bg-base rounded-t-3xl px-4 pt-5 pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]">
+            <div className="ancho-app bg-base rounded-t-3xl px-4 pt-5 pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-display font-bold text-[20px]">{title}</h3>
                 <button

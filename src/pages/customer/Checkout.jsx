@@ -215,7 +215,7 @@ export default function Checkout() {
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 px-4 py-3 bg-base border-t border-base-line">
-        <div className="max-w-md md:max-w-lg mx-auto">
+        <div className="ancho-app">
           <button onClick={handlePlaceOrder} disabled={placing} className="btn-accent w-full">
             {textoBoton}
           </button>

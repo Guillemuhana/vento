@@ -111,7 +111,7 @@ export default function Home() {
           del buscador. */}
       <header className="px-4 pt-4 pb-4">
         <div className="flex items-center gap-3">
-          <Cartel className="-ml-4 h-[107px]" />
+          <Cartel className="-ml-4 h-[111px]" />
 
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1">
@@ -168,7 +168,7 @@ export default function Home() {
 
       {/* Fila de accesos redondos, como en las piezas de marca. "Más" despliega
           el resto de las categorías en vez de mandarlas a otra pantalla. */}
-      <div className="flex items-start justify-between gap-1 px-4 mb-5">
+      <div className="flex items-start justify-between gap-1 px-4 mb-5 md:justify-start md:gap-8">
         {ACCESOS.map((c) => (
           <CategoryTile key={c.slug} category={c} size="circle" />
         ))}

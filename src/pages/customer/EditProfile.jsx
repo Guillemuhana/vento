@@ -295,7 +295,7 @@ export default function EditProfile() {
 
       {/* Guardar sticky, deshabilitado hasta que haya cambios */}
       <div className="fixed bottom-0 left-0 right-0 z-30">
-        <div className="max-w-md md:max-w-lg mx-auto bg-base px-4 pt-3 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] border-t border-base-line">
+        <div className="ancho-app bg-base px-4 pt-3 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] border-t border-base-line">
           <button
             type="button"
             onClick={handleSave}

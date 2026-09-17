@@ -51,7 +51,7 @@ export default function Favorites() {
       )}
 
       {favorites.length > 0 && (
-        <div className="px-4 space-y-5 mb-8">
+        <div className="px-4 grid gap-5 md:grid-cols-2 xl:grid-cols-3 mb-8">
           {favorites.map((store) => (
             <StoreCard key={store.id} store={store} variant="list" />
           ))}

@@ -62,7 +62,7 @@ export default function Cart() {
       </div>
 
       <div className="fixed bottom-16 left-0 right-0 px-4">
-        <div className="max-w-md md:max-w-lg mx-auto card p-4 flex items-center justify-between">
+        <div className="ancho-app card p-4 flex items-center justify-between">
           <div>
             <p className="text-xs text-ink-faint">{t('common.subtotal')}</p>
             <p className="font-bold">{formatMoney(subtotal())}</p>

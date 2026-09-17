@@ -35,16 +35,30 @@ h1, h2, h3, h4 {
   @apply snap-start flex-shrink-0;
 }
 
-.container-app {
-  @apply max-w-md mx-auto min-h-screen bg-base relative;
-  /* La nav flota: 84px de barra + safe area + aire. */
-  padding-bottom: calc(7.5rem + env(safe-area-inset-bottom, 0px));
+/* Ancho de la app. En el celular es una columna de teléfono; en pantallas
+   grandes se abre para ocupar la pantalla en vez de dejar una tira angosta al
+   medio. Lo usan tanto el contenido como las barras fijas de abajo, así
+   crecen juntos y nunca quedan desalineados. */
+.ancho-app {
+  @apply mx-auto w-full max-w-md;
 }
 
 @media (min-width: 768px) {
-  .container-app {
-    @apply max-w-lg shadow-float;
+  .ancho-app {
+    max-width: 46rem;
   }
+}
+
+@media (min-width: 1280px) {
+  .ancho-app {
+    max-width: 78rem;
+  }
+}
+
+.container-app {
+  @apply ancho-app min-h-screen bg-base relative;
+  /* La nav flota: 84px de barra + safe area + aire. */
+  padding-bottom: calc(7.5rem + env(safe-area-inset-bottom, 0px));
 }
 
 .input-field {
