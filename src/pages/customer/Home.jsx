@@ -101,9 +101,9 @@ export default function Home() {
       <header className="px-4 pt-4 pb-3">
         <div className="flex justify-center mb-5">
           <img
-            src="/assets/logo/just-minutes.png"
+            src="/assets/logo/logo02.png"
             alt="Just Minutes"
-            className="h-9 w-auto max-w-[190px] object-contain"
+            className="h-14 w-auto max-w-[180px] object-contain"
           />
         </div>
         <p className="text-[13px] text-ink-faint leading-tight">
