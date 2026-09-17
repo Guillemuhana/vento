@@ -36,7 +36,8 @@ export default {
   'nav.viewCart': 'View cart',
   'nav.backToTop': 'Back to top',
 
-  'home.addAddress': 'Add your address',
+  'home.heroTitle': 'Whatever you need, in {city}',
+  'home.addAddress': 'Add your delivery address',
   'home.greeting': 'Hi, {name}',
   'home.searchPlaceholder': 'Search "{term}"',
   'home.noStores': 'No stores yet',

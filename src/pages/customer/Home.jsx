@@ -97,7 +97,7 @@ export default function Home() {
     <div className="container-app">
       <ScrollTopPill />
 
-      {/* Dirección de entrega */}
+      {/* Titular de ciudad + dirección de entrega */}
       <header className="px-4 pt-4 pb-3">
         <div className="flex justify-center mb-5">
           <img
@@ -106,24 +106,24 @@ export default function Home() {
             className="h-9 w-auto max-w-[190px] object-contain"
           />
         </div>
-        <p className="mb-3 font-display text-[22px] font-bold leading-tight text-ink">
+        <p className="text-[13px] text-ink-faint leading-tight">
           {t('home.greeting', { name: firstName })}
         </p>
-        <div>
-          <p className="text-[13px] text-ink-faint leading-tight">{profile?.city || 'Córdoba'}</p>
-          <button
-            type="button"
-            onClick={() => navigate('/cuenta/direcciones')}
-            className="flex items-center gap-2 text-left"
-          >
-            <span className="font-display font-bold text-[20px] leading-tight truncate max-w-[75vw]">
-              {profile?.address || t('home.addAddress')}
-            </span>
-            <span className="h-7 w-7 rounded-full bg-base-muted flex items-center justify-center flex-shrink-0 text-ink">
-              <AppIcon path="ui/chevron-abajo" fallback={IconChevronDown} size={16} />
-            </span>
-          </button>
-        </div>
+        <p className="mt-1 font-display text-[24px] font-bold leading-tight text-ink">
+          {t('home.heroTitle', { city: profile?.city || 'Miami' })}
+        </p>
+        <button
+          type="button"
+          onClick={() => navigate('/cuenta/direcciones')}
+          className="mt-2 flex items-center gap-2 text-left"
+        >
+          <span className="text-[14px] text-ink-faint leading-tight truncate max-w-[75vw]">
+            {profile?.address || t('home.addAddress')}
+          </span>
+          <span className="h-6 w-6 rounded-full bg-base-muted flex items-center justify-center flex-shrink-0 text-ink">
+            <AppIcon path="ui/chevron-abajo" fallback={IconChevronDown} size={14} />
+          </span>
+        </button>
       </header>
 
       {/* Buscador (abre la pantalla de búsqueda) */}

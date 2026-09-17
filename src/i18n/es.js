@@ -36,7 +36,8 @@ export default {
   'nav.viewCart': 'Ver carrito',
   'nav.backToTop': 'Volver arriba',
 
-  'home.addAddress': 'Agregá tu dirección',
+  'home.heroTitle': 'Lo que busques, en {city}',
+  'home.addAddress': 'Agregá tu dirección de entrega',
   'home.greeting': 'Hola, {name}',
   'home.searchPlaceholder': 'Busca "{term}"',
   'home.noStores': 'Todavía no hay comercios',

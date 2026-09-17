@@ -113,7 +113,7 @@ export const BANNERS = [
 ]
 
 // Placeholders del buscador: se reemplazan solos cada unos segundos.
-export const SEARCH_HINTS = ['Chocolate', 'Fernet', 'Pizza', 'Helado', 'Asado', 'Sushi']
+export const SEARCH_HINTS = ['Cafecito', 'Pizza', 'Sushi', 'Burgers', 'Açaí', 'Tacos']
 
 // Chips de "Los más buscados" del buscador full-screen.
 export const TOP_SEARCHES = [

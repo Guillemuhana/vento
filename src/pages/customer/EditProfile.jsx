@@ -290,7 +290,7 @@ export default function EditProfile() {
           onChange={set('address')}
           placeholder={t('profile.addressPlaceholder')}
         />
-        <Field label={t('profile.city')} value={form.city} onChange={set('city')} placeholder="Córdoba" />
+        <Field label={t('profile.city')} value={form.city} onChange={set('city')} placeholder="Miami" />
       </div>
 
       {/* Guardar sticky, deshabilitado hasta que haya cambios */}
