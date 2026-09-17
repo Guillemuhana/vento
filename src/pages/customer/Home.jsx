@@ -111,9 +111,9 @@ export default function Home() {
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <img
-              src="/assets/logo/logo02.png"
+              src="/assets/logo/cartel-app.png"
               alt="Just Minutes"
-              className="h-11 w-auto max-w-[150px] object-contain"
+              className="cartel-prendido h-16 w-auto object-contain"
             />
             <button
               type="button"

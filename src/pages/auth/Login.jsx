@@ -32,9 +32,9 @@ export default function Login() {
           <div className="login-ring absolute -bottom-32 -left-20 h-72 w-72 rounded-full border-[32px] border-white/10" />
           <div className="login-mark relative">
             <img
-              src="/assets/logo/logo02.png"
+              src="/assets/logo/cartel-app.png"
               alt="Just Minutes"
-              className="w-full max-w-[260px] object-contain brightness-0 invert"
+              className="cartel-prendido w-full max-w-[230px] object-contain"
             />
           </div>
           <div className="login-copy relative max-w-xs text-white">
@@ -47,9 +47,9 @@ export default function Login() {
           <div className="login-heading mb-9 text-center md:text-left">
             <div className="mb-5 flex justify-center md:hidden">
               <img
-                src="/assets/logo/logo02.png"
+                src="/assets/logo/cartel-app.png"
                 alt="Just Minutes"
-                className="w-[min(62vw,220px)] max-w-full object-contain"
+                className="cartel-prendido w-[min(46vw,170px)] max-w-full object-contain"
               />
             </div>
             <p className="text-sm text-ink-faint">{t('auth.tagline')}</p>

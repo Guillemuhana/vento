@@ -90,6 +90,30 @@ h1, h2, h3, h4 {
   @apply inline-flex items-center gap-1 rounded-md bg-promo text-ink font-bold text-[11px] leading-none px-2 py-1;
 }
 
+/* Cartel encendido: halo cálido alrededor del disco y un latido lento, como
+   un letrero luminoso de local. El halo se dibuja sobre la silueta real del
+   PNG (drop-shadow respeta la transparencia), no sobre una caja rectangular. */
+.cartel-prendido {
+  animation: cartel-luz 4.5s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 7px rgba(255, 196, 132, 0.5))
+    drop-shadow(0 0 20px rgba(244, 105, 47, 0.32));
+}
+@keyframes cartel-luz {
+  from {
+    filter: drop-shadow(0 0 5px rgba(255, 196, 132, 0.34))
+      drop-shadow(0 0 14px rgba(244, 105, 47, 0.2));
+  }
+  to {
+    filter: drop-shadow(0 0 10px rgba(255, 210, 160, 0.72))
+      drop-shadow(0 0 28px rgba(244, 105, 47, 0.45));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cartel-prendido {
+    animation: none;
+  }
+}
+
 /* Entrada del login: marca viva, pero sin movimiento obligatorio. */
 .login-stage {
   isolation: isolate;
