@@ -111,7 +111,7 @@ export default function Home() {
           del buscador. */}
       <header className="px-4 pt-4 pb-4">
         <div className="flex items-center gap-3">
-          <Cartel className="-ml-4 h-[101px]" />
+          <Cartel className="-ml-4 h-[107px]" />
 
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1">
@@ -175,13 +175,13 @@ export default function Home() {
         <button
           type="button"
           onClick={() => setVerTodas((v) => !v)}
-          className="flex w-[68px] flex-shrink-0 flex-col items-center gap-1.5 active:scale-95 transition"
+          className="flex w-[70px] flex-shrink-0 flex-col items-center gap-1.5 active:scale-95 transition"
         >
-          <span className="flex h-[62px] w-[62px] items-center justify-center rounded-full bg-base-muted text-ink">
+          <span className="flex h-[66px] w-[66px] items-center justify-center rounded-full bg-base-muted text-ink">
             <AppIcon
               path={verTodas ? 'ui/chevron-abajo' : 'ui/mas'}
               fallback={verTodas ? IconChevronDown : IconMore}
-              size={22}
+              size={24}
             />
           </span>
           <span className="w-full text-center text-[11px] font-semibold leading-tight text-ink">
