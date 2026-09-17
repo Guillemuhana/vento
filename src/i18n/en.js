@@ -90,8 +90,6 @@ export default {
   'banner.fioritoParrilla.subtitle': 'Grilled cuts with Argentine flavor',
   'banner.fioritoPulpo.title': 'Grilled octopus',
   'banner.fioritoPulpo.subtitle': 'A Fiorito specialty',
-  'banner.fioritoRibeye.title': 'Grilled ribeye',
-  'banner.fioritoRibeye.subtitle': 'Choose your favorite cut',
   'buildingPromo.eyebrow': 'Building promotion',
   'buildingPromo.daysLabel': 'Promo days',
   'buildingPromo.tuesday': 'Tuesday',

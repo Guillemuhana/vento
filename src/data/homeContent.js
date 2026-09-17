@@ -75,7 +75,7 @@ export const BANNERS = [
   },
   {
     id: 'fiorito-carne',
-    image: '/assets/banners/WhatsApp Image 2026-09-16 at 2.40.27 PM.jpeg',
+    image: '/assets/banners/carne.png',
     titleKey: 'banner.fioritoCarne.title',
     subtitleKey: 'banner.fioritoCarne.subtitle',
     bg: 'bg-tile-peach',
@@ -85,7 +85,7 @@ export const BANNERS = [
   },
   {
     id: 'fiorito-milanesa',
-    image: '/assets/banners/WhatsApp Image 2026-09-16 at 2.40.27 PM (1).jpeg',
+    image: '/assets/banners/milanesa.png',
     titleKey: 'banner.fioritoMilanesa.title',
     subtitleKey: 'banner.fioritoMilanesa.subtitle',
     bg: 'bg-tile-peach',
@@ -95,7 +95,7 @@ export const BANNERS = [
   },
   {
     id: 'fiorito-parrilla',
-    image: '/assets/banners/WhatsApp Image 2026-09-16 at 2.40.27 PM (2).jpeg',
+    image: '/assets/banners/asado.png',
     titleKey: 'banner.fioritoParrilla.title',
     subtitleKey: 'banner.fioritoParrilla.subtitle',
     bg: 'bg-tile-peach',
@@ -105,21 +105,13 @@ export const BANNERS = [
   },
   {
     id: 'fiorito-pulpo',
-    image: '/assets/banners/WhatsApp Image 2026-09-16 at 2.40.27 PM (3).jpeg',
+    image: '/assets/banners/pulpo.png',
     titleKey: 'banner.fioritoPulpo.title',
     subtitleKey: 'banner.fioritoPulpo.subtitle',
     bg: 'bg-tile-peach',
     storeName: 'Fiorito',
     sponsored: true,
     adPriority: 60,
-  },
-  {
-    id: 'fiorito-ribeye',
-    image: '/assets/banners/WhatsApp Image 2026-09-16 at 2.40.28 PM.jpeg',
-    titleKey: 'banner.fioritoRibeye.title',
-    subtitleKey: 'banner.fioritoRibeye.subtitle',
-    bg: 'bg-tile-peach',
-    storeName: 'Fiorito',
   },
 ]
 

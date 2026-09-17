@@ -90,8 +90,6 @@ export default {
   'banner.fioritoParrilla.subtitle': 'Cortes a la parrilla con sabor argentino',
   'banner.fioritoPulpo.title': 'Pulpo a la plancha',
   'banner.fioritoPulpo.subtitle': 'Una especialidad de Fiorito',
-  'banner.fioritoRibeye.title': 'Ribeye a la parrilla',
-  'banner.fioritoRibeye.subtitle': 'Elegí tu corte favorito',
   'buildingPromo.eyebrow': 'Promoción por edificio',
   'buildingPromo.daysLabel': 'Días de promo',
   'buildingPromo.tuesday': 'Martes',
