@@ -11,6 +11,7 @@ import Spinner from '../../components/ui/Spinner'
 import EmptyState from '../../components/ui/EmptyState'
 import ScrollTopPill from '../../components/layout/ScrollTopPill'
 import BuildingPromotion from '../../components/home/BuildingPromotion'
+import CartelPrendido from '../../components/brand/CartelPrendido'
 import { IconSearch, IconChevronDown, IconBell, IconPin, IconMore } from '../../components/ui/Icon'
 import AppIcon from '../../components/ui/AppIcon'
 import { useT } from '../../i18n'
@@ -106,62 +107,64 @@ export default function Home() {
     <div className="container-app">
       <ScrollTopPill />
 
-      {/* Encabezado: logo a la izquierda, ciudad debajo y campana a la derecha. */}
-      <header className="px-4 pt-4 pb-3">
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0">
-            <img
-              src="/assets/logo/cartel-app.png"
-              alt="Just Minutes"
-              className="cartel-prendido h-16 w-auto object-contain"
-            />
+      {/* Encabezado: el cartel a la izquierda y, a su lado, la ciudad arriba
+          del buscador. */}
+      <header className="px-4 pt-4 pb-4">
+        <div className="flex items-center gap-3">
+          <CartelPrendido className="-ml-5 h-48" />
+
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-1">
+              <button
+                type="button"
+                onClick={() => navigate('/cuenta/perfil')}
+                className="flex min-w-0 flex-1 items-center gap-1 text-left"
+              >
+                <AppIcon
+                  path="ui/ubicacion"
+                  fallback={IconPin}
+                  size={14}
+                  className="text-mango-500 flex-shrink-0"
+                />
+                <span className="truncate text-[13px] font-semibold text-ink">
+                  {profile?.address || profile?.city || 'Miami, FL'}
+                </span>
+                <AppIcon
+                  path="ui/chevron-abajo"
+                  fallback={IconChevronDown}
+                  size={14}
+                  className="flex-shrink-0 text-ink-faint"
+                />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => navigate('/cuenta/notificaciones')}
+                aria-label={t('account.notifications')}
+                className="h-8 w-8 flex-shrink-0 rounded-full flex items-center justify-center text-ink active:scale-90 transition"
+              >
+                <AppIcon path="ui/campana" fallback={IconBell} size={20} />
+              </button>
+            </div>
+
             <button
               type="button"
-              onClick={() => navigate('/cuenta/perfil')}
-              className="mt-1 flex items-center gap-1 text-left"
+              onClick={() => navigate('/buscar')}
+              className="mt-2 flex h-12 w-full items-center gap-2 rounded-full bg-base px-4 text-left shadow-pill"
             >
               <AppIcon
-                path="ui/ubicacion"
-                fallback={IconPin}
-                size={14}
-                className="text-mango-500 flex-shrink-0"
+                path="ui/buscar"
+                fallback={IconSearch}
+                size={19}
+                className="flex-shrink-0 text-ink"
               />
-              <span className="text-[13px] font-semibold text-ink truncate max-w-[52vw]">
-                {profile?.address || profile?.city || 'Miami, FL'}
+              <span className="truncate text-[14px] text-ink-faint">
+                {t('home.searchPlaceholder', { term: SEARCH_HINTS[hint] })}
               </span>
-              <AppIcon path="ui/chevron-abajo" fallback={IconChevronDown} size={14} className="text-ink-faint" />
             </button>
           </div>
-
-          <button
-            type="button"
-            onClick={() => navigate('/cuenta/notificaciones')}
-            aria-label={t('account.notifications')}
-            className="h-10 w-10 flex-shrink-0 rounded-full flex items-center justify-center text-ink active:scale-90 transition"
-          >
-            <AppIcon path="ui/campana" fallback={IconBell} size={22} />
-          </button>
         </div>
       </header>
-
-      {/* Buscador (abre la pantalla de búsqueda) */}
-      <div className="px-4 pb-4">
-        <button
-          type="button"
-          onClick={() => navigate('/buscar')}
-          className="w-full h-14 rounded-full bg-base shadow-pill flex items-center gap-3 px-5 text-left"
-        >
-          <AppIcon
-            path="ui/buscar"
-            fallback={IconSearch}
-            size={22}
-            className="text-ink flex-shrink-0"
-          />
-          <span className="text-[16px] text-ink-faint truncate">
-            {t('home.searchPlaceholder', { term: SEARCH_HINTS[hint] })}
-          </span>
-        </button>
-      </div>
 
       {/* Fila de accesos redondos, como en las piezas de marca. "Más" despliega
           el resto de las categorías en vez de mandarlas a otra pantalla. */}
@@ -172,13 +175,13 @@ export default function Home() {
         <button
           type="button"
           onClick={() => setVerTodas((v) => !v)}
-          className="flex w-[64px] flex-shrink-0 flex-col items-center gap-1.5 active:scale-95 transition"
+          className="flex w-[68px] flex-shrink-0 flex-col items-center gap-1.5 active:scale-95 transition"
         >
-          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-base-muted text-ink">
+          <span className="flex h-[62px] w-[62px] items-center justify-center rounded-full bg-base-muted text-ink">
             <AppIcon
               path={verTodas ? 'ui/chevron-abajo' : 'ui/mas'}
               fallback={verTodas ? IconChevronDown : IconMore}
-              size={20}
+              size={22}
             />
           </span>
           <span className="w-full text-center text-[11px] font-semibold leading-tight text-ink">

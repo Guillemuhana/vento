@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { useAuthStore } from '../../store/useAuthStore'
 import { useT } from '../../i18n'
+import CartelPrendido from '../../components/brand/CartelPrendido'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -31,11 +32,7 @@ export default function Login() {
           <div className="login-orb absolute -right-24 -top-24 h-64 w-64 rounded-full bg-mango-500/90" />
           <div className="login-ring absolute -bottom-32 -left-20 h-72 w-72 rounded-full border-[32px] border-white/10" />
           <div className="login-mark relative">
-            <img
-              src="/assets/logo/cartel-app.png"
-              alt="Just Minutes"
-              className="cartel-prendido w-full max-w-[230px] object-contain"
-            />
+            <CartelPrendido className="h-[230px]" />
           </div>
           <div className="login-copy relative max-w-xs text-white">
             <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-mango-300">Miami, FL</p>
@@ -46,11 +43,7 @@ export default function Login() {
         <main className="login-form flex w-full flex-col justify-center px-6 py-10 sm:px-12 md:w-[54%] md:px-16">
           <div className="login-heading mb-9 text-center md:text-left">
             <div className="mb-5 flex justify-center md:hidden">
-              <img
-                src="/assets/logo/cartel-app.png"
-                alt="Just Minutes"
-                className="cartel-prendido w-[min(46vw,170px)] max-w-full object-contain"
-              />
+              <CartelPrendido className="h-[min(46vw,170px)]" />
             </div>
             <p className="text-sm text-ink-faint">{t('auth.tagline')}</p>
             <h1 className="mt-2 font-display text-2xl font-bold text-ink sm:text-3xl">{t('auth.signIn')}</h1>

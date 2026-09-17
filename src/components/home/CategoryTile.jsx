@@ -17,18 +17,18 @@ export default function CategoryTile({ category, size = 'hero' }) {
     return (
       <Link
         to={`/categoria/${category.slug}`}
-        className="flex w-[64px] flex-shrink-0 flex-col items-center gap-1.5 active:scale-95 transition"
+        className="flex w-[68px] flex-shrink-0 flex-col items-center gap-1.5 active:scale-95 transition"
       >
-        <span className={`${category.bg} flex h-14 w-14 items-center justify-center rounded-full`}>
+        <span className={`${category.bg} flex h-[62px] w-[62px] items-center justify-center rounded-full`}>
           {category.image && !broken ? (
             <img
               src={category.image}
               alt=""
               onError={() => setBroken(true)}
-              className="h-8 w-8 object-contain"
+              className="h-9 w-9 object-contain"
             />
           ) : (
-            <span className="font-display text-lg font-bold text-ink-soft">
+            <span className="font-display text-xl font-bold text-ink-soft">
               {t(category.labelKey)[0]}
             </span>
           )}
