@@ -31,6 +31,7 @@ import {
   esElDia,
 } from '../../utils/feed'
 import { NEO_LOFTS_PROMOTION } from '../../data/buildingPromotions'
+import { contarSinLeer } from '../../data/notificaciones'
 
 // La fila de accesos del home: los dos rubros grandes más bebidas y farmacia.
 // El resto de las categorías queda detrás del botón "Más".
@@ -51,6 +52,13 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
   const [hint, setHint] = useState(0)
   const [verTodas, setVerTodas] = useState(false)
+  // Globito de la campana. Se lee al entrar al home, así vuelve en cero cuando
+  // la persona ya pasó por la pantalla de novedades.
+  const [sinLeer, setSinLeer] = useState(0)
+
+  useEffect(() => {
+    setSinLeer(contarSinLeer())
+  }, [])
 
   useEffect(() => {
     async function load() {
@@ -111,7 +119,7 @@ export default function Home() {
           del buscador. */}
       <header className="px-4 pt-4 pb-4">
         <div className="flex items-center gap-3">
-          <Cartel className="-ml-7 h-[117px]" />
+          <Cartel className="-ml-7 h-[121px]" />
 
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1">
@@ -140,10 +148,19 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => navigate('/cuenta/notificaciones')}
-                aria-label={t('account.notifications')}
-                className="h-8 w-8 flex-shrink-0 rounded-full flex items-center justify-center text-ink active:scale-90 transition"
+                aria-label={
+                  sinLeer > 0
+                    ? t('notif.pending', { count: sinLeer })
+                    : t('account.notifications')
+                }
+                className="relative h-8 w-8 flex-shrink-0 rounded-full flex items-center justify-center text-ink active:scale-90 transition"
               >
                 <AppIcon path="ui/campana" fallback={IconBell} size={20} />
+                {sinLeer > 0 && (
+                  <span className="absolute -right-0.5 -top-0.5 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-mango-500 px-1 text-[10px] font-bold leading-none text-white ring-2 ring-base">
+                    {sinLeer}
+                  </span>
+                )}
               </button>
             </div>
 

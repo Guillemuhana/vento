@@ -310,6 +310,11 @@ export default {
   'partner.offer3': 'Panel para cargar productos y ver tus pedidos en vivo',
   'partner.offer4': 'Promos y banners para aparecer destacado en el home',
 
+  'notif.latest': 'Últimas novedades',
+  'notif.settings': 'Sobre qué te avisamos',
+  'notif.pending': 'Notificaciones, {count} sin leer',
+  'notif.buildingPromo.title': 'Promos para Neo Lofts',
+  'notif.buildingPromo.text': 'Si vivís o trabajás en Neo Lofts, los martes y jueves tenés beneficios exclusivos en los comercios de la zona. Tocá para verlos.',
   'notifications.title': 'Notificaciones',
   'notifications.description': 'Elegí sobre qué querés que te avisemos. Lo guardamos en este dispositivo.',
   'notifications.orders': 'Estado de tus pedidos',

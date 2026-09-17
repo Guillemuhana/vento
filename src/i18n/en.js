@@ -310,6 +310,11 @@ export default {
   'partner.offer3': 'A dashboard to upload products and track live orders',
   'partner.offer4': 'Promos and banners to get featured on the home screen',
 
+  'notif.latest': 'Latest news',
+  'notif.settings': 'What we tell you about',
+  'notif.pending': 'Notifications, {count} unread',
+  'notif.buildingPromo.title': 'Neo Lofts deals',
+  'notif.buildingPromo.text': 'If you live or work at Neo Lofts, Tuesdays and Thursdays come with exclusive deals at nearby stores. Tap to see them.',
   'notifications.title': 'Notifications',
   'notifications.description': 'Choose what you want to hear about. We save this on this device.',
   'notifications.orders': 'Order updates',

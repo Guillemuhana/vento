@@ -1,13 +1,24 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Navbar from '../../components/layout/Navbar'
 import { useT } from '../../i18n'
+import { NOTIFICACIONES, leerLeidas, marcarTodasLeidas } from '../../data/notificaciones'
 
 const STORAGE_KEY = 'just-minutes-notifications'
 const DEFAULTS = { orders: true, promotions: true, points: true }
 
 export default function Notifications() {
-  const { t } = useT()
+  const { t, lang } = useT()
   const [settings, setSettings] = useState(DEFAULTS)
+  // Cuáles estaban sin leer al entrar: se congela al montar para que las nuevas
+  // sigan marcadas mientras la persona lee la pantalla, y no se apaguen solas.
+  const [nuevas, setNuevas] = useState([])
+
+  useEffect(() => {
+    const leidas = leerLeidas()
+    setNuevas(NOTIFICACIONES.filter((n) => !leidas.includes(n.id)).map((n) => n.id))
+    marcarTodasLeidas()
+  }, [])
 
   useEffect(() => {
     try {
@@ -35,7 +46,43 @@ export default function Notifications() {
   return (
     <div className="container-app">
       <Navbar title={t('notifications.title')} back />
+      {NOTIFICACIONES.length > 0 && (
+        <section className="px-4 pt-4">
+          <h2 className="section-title mb-2">{t('notif.latest')}</h2>
+          <div className="space-y-2">
+            {NOTIFICACIONES.map((n) => (
+              <Link key={n.id} to={n.to} className="card flex gap-3 overflow-hidden">
+                {n.imagen && (
+                  <img
+                    src={n.imagen}
+                    alt=""
+                    loading="lazy"
+                    className="h-[84px] w-[84px] flex-shrink-0 object-cover"
+                  />
+                )}
+                <div className="min-w-0 flex-1 py-3 pr-3">
+                  <div className="flex items-start gap-2">
+                    <p className="flex-1 font-semibold text-sm leading-tight">{t(n.tituloKey)}</p>
+                    {nuevas.includes(n.id) && (
+                      <span className="mt-0.5 h-2 w-2 flex-shrink-0 rounded-full bg-mango-500" />
+                    )}
+                  </div>
+                  <p className="mt-1 text-xs text-ink-soft line-clamp-2">{t(n.textoKey)}</p>
+                  <p className="mt-1 text-[11px] text-ink-faint">
+                    {new Date(n.fecha).toLocaleDateString(lang === 'en' ? 'en-US' : 'es-US', {
+                      day: 'numeric',
+                      month: 'short',
+                    })}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       <div className="px-4 py-4 space-y-2">
+        <h2 className="section-title mb-1">{t('notif.settings')}</h2>
         <p className="text-sm text-ink-soft mb-4">{t('notifications.description')}</p>
         {options.map(([key, title, description]) => (
           <button
