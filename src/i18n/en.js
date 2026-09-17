@@ -260,6 +260,7 @@ export default {
   'register.create': 'Create account',
   'register.creating': 'Creating account…',
   'register.created': 'Account created. Check your email if confirmation is required.',
+  'register.createdIn': "You're in! Your account is ready.",
   'register.error': "We couldn't create your account",
   'register.haveAccount': 'Already have an account?',
   'register.goSignIn': 'Sign in',

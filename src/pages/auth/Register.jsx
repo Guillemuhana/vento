@@ -21,9 +21,18 @@ export default function Register() {
     e.preventDefault()
     setLoading(true)
     try {
-      await signUp(form)
-      toast.success(t('register.created'))
-      navigate('/login')
+      const data = await signUp(form)
+      // Con la confirmación de email desactivada en Supabase, el registro ya
+      // devuelve sesión: se entra derecho en vez de mandar a iniciar sesión
+      // y hacer escribir los datos de nuevo. Si algún día se activa la
+      // confirmación, no viene sesión y se avisa que revise el correo.
+      if (data?.session) {
+        toast.success(t('register.createdIn'))
+        navigate('/', { replace: true })
+      } else {
+        toast.success(t('register.created'))
+        navigate('/login')
+      }
     } catch (err) {
       toast.error(err.message || t('register.error'))
     } finally {
