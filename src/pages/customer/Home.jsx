@@ -111,7 +111,7 @@ export default function Home() {
           del buscador. */}
       <header className="px-4 pt-4 pb-4">
         <div className="flex items-center gap-3">
-          <Cartel className="-ml-6 h-[113px]" />
+          <Cartel className="-ml-6 h-[115px]" />
 
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1">
