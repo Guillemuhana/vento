@@ -11,7 +11,7 @@ import Spinner from '../../components/ui/Spinner'
 import EmptyState from '../../components/ui/EmptyState'
 import ScrollTopPill from '../../components/layout/ScrollTopPill'
 import BuildingPromotion from '../../components/home/BuildingPromotion'
-import CartelPrendido from '../../components/brand/CartelPrendido'
+import Cartel from '../../components/brand/Cartel'
 import { IconSearch, IconChevronDown, IconBell, IconPin, IconMore } from '../../components/ui/Icon'
 import AppIcon from '../../components/ui/AppIcon'
 import { useT } from '../../i18n'
@@ -111,7 +111,7 @@ export default function Home() {
           del buscador. */}
       <header className="px-4 pt-4 pb-4">
         <div className="flex items-center gap-3">
-          <CartelPrendido className="-ml-4 h-[101px]" />
+          <Cartel className="-ml-4 h-[101px]" />
 
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1">

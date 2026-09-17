@@ -72,6 +72,8 @@ export default {
   'cat.hogar': 'Hogar',
   'cat.regalos': 'Regalos',
 
+  'banner.moto.title': 'Tu barrio, a minutos',
+  'banner.moto.subtitle': 'Pedidos rápidos en todo Miami',
   'banner.fiorito.title': 'Fiorito',
   'banner.fiorito.subtitle': 'Restaurante argentino · parrilla, pastas y empanadas',
   'banner.viewProducts': 'Ver productos',

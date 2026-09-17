@@ -90,61 +90,6 @@ h1, h2, h3, h4 {
   @apply inline-flex items-center gap-1 rounded-md bg-promo text-ink font-bold text-[11px] leading-none px-2 py-1;
 }
 
-/* Resplandor del cartel encendido.
-   Dos capas: un núcleo cálido pegado al disco y una luz naranja más abierta
-   que se derrama alrededor, como la de un letrero sobre una pared. El latido
-   arranca recién cuando terminó el encendido (1.6s), así no se pisan. */
-.cartel-resplandor {
-  background:
-    radial-gradient(circle at 50% 50%, rgba(255, 224, 186, 0.55) 0%, rgba(255, 224, 186, 0) 62%),
-    radial-gradient(circle at 50% 52%, rgba(244, 105, 47, 0.5) 0%, rgba(244, 105, 47, 0) 72%);
-  filter: blur(14px);
-  transform: scale(1.18);
-  animation: cartel-latido 5s 1.6s ease-in-out infinite alternate;
-}
-
-@keyframes cartel-latido {
-  from {
-    opacity: 0.6;
-    filter: blur(10px);
-  }
-  to {
-    opacity: 0.9;
-    filter: blur(15px);
-  }
-}
-
-/* Luz de las letras. "screen" suma luz sobre la foto del cartel en vez de
-   taparla, que es justo lo que hace un tubo encendido detras de un acrilico.
-   El latido va desfasado del resplandor de afuera para que no respiren igual. */
-.cartel-luz {
-  mix-blend-mode: screen;
-}
-.cartel-luz-derrame {
-  filter: blur(7px);
-  animation: cartel-brasa 4.2s 1.6s ease-in-out infinite alternate;
-}
-.cartel-luz-nucleo {
-  filter: blur(1px);
-  opacity: 0.9;
-}
-
-@keyframes cartel-brasa {
-  from {
-    opacity: 0.55;
-  }
-  to {
-    opacity: 0.95;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cartel-resplandor,
-  .cartel-luz-derrame {
-    animation: none;
-  }
-}
-
 /* Entrada del login: marca viva, pero sin movimiento obligatorio. */
 .login-stage {
   isolation: isolate;

@@ -50,6 +50,17 @@ export const CATEGORIES = [
 // Banners promocionales. `to` es opcional (a dónde lleva el banner al tocarlo).
 export const BANNERS = [
   {
+    // Banner propio de la marca: la moto de Just Minutes en Miami. Sin
+    // `storeName` no enlaza a ningún comercio, así que lleva a Ofertas.
+    id: 'marca-moto',
+    image: '/assets/banners/moto.png',
+    titleKey: 'banner.moto.title',
+    subtitleKey: 'banner.moto.subtitle',
+    bg: 'bg-forest-600',
+    to: '/ofertas',
+    adPriority: 110,
+  },
+  {
     // Publicidad del restaurante. `storeName` hace que el banner enlace solo a la
     // ficha del comercio: el home lo resuelve contra los comercios cargados, así
     // no hay que hardcodear ningún id.

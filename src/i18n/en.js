@@ -72,6 +72,8 @@ export default {
   'cat.hogar': 'Home',
   'cat.regalos': 'Gifts',
 
+  'banner.moto.title': 'Your neighborhood, minutes away',
+  'banner.moto.subtitle': 'Fast delivery across Miami',
   'banner.fiorito.title': 'Fiorito',
   'banner.fiorito.subtitle': 'Argentine restaurant · grill, pasta and empanadas',
   'banner.viewProducts': 'View products',
