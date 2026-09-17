@@ -109,7 +109,10 @@ export default function Home() {
 
       {/* Encabezado: el cartel a la izquierda y, a su lado, la ciudad arriba
           del buscador. */}
-      <header className="px-4 pt-4 pb-4">
+      <header className="relative px-4 pt-4 pb-4">
+        {/* Montante: el hierro amurado al borde, del que cuelga el cartel. */}
+        <span aria-hidden="true" className="montante-cartel absolute inset-y-0 left-0 w-[11px]" />
+
         <div className="flex items-center gap-3">
           <Cartel className="-ml-4 h-[113px]" />
 
