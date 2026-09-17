@@ -81,6 +81,15 @@ export const IconChevronDown = (p) => (
   <Svg {...p}><path d="m5.5 9.5 6.5 6.5 6.5-6.5" /></Svg>
 )
 
+// Tres puntos: el botón "Más" de la fila de categorías del home.
+export const IconMore = (p) => (
+  <Svg {...p}>
+    <circle cx="5" cy="12" r="1.6" fill="currentColor" stroke="none" />
+    <circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none" />
+    <circle cx="19" cy="12" r="1.6" fill="currentColor" stroke="none" />
+  </Svg>
+)
+
 export const IconChevronLeft = (p) => (
   <Svg {...p}><path d="m14.5 5.5-6.5 6.5 6.5 6.5" /></Svg>
 )

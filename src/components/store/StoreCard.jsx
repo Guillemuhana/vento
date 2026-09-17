@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useFavoritesStore } from '../../store/useFavoritesStore'
-import { IconHeart, IconHeartSolid, IconStar, IconBolt } from '../ui/Icon'
+import { IconHeart, IconHeartSolid, IconStar } from '../ui/Icon'
 import AppIcon from '../ui/AppIcon'
 import { useT } from '../../i18n'
 import { getStoreImage } from '../../data/storeImages'
@@ -22,7 +22,7 @@ export default function StoreCard({ store, variant = 'rail' }) {
   return (
     <Link
       to={`/comercio/${store.id}`}
-      className={`block group ${variant === 'rail' ? 'w-[272px]' : 'w-full'}`}
+      className={`block group ${variant === 'rail' ? 'w-[178px]' : 'w-full'}`}
     >
       <div className="relative rounded-2xl overflow-hidden bg-base-muted aspect-[16/10]">
         {image ? (
@@ -71,29 +71,36 @@ export default function StoreCard({ store, variant = 'rail' }) {
       </div>
 
       <div className="pt-2">
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="font-display font-bold text-[17px] leading-tight text-ink truncate">
-            {store.name}
-          </h3>
+        <h3 className="font-display font-bold text-[15px] leading-tight text-ink truncate">
+          {store.name}
+        </h3>
+
+        <p className="mt-0.5 truncate text-[12px] capitalize text-ink-faint">
+          {[
+            store.category,
+            store.distance_km != null
+              ? `${Number(store.distance_km).toFixed(1)} ${t('common.km')}`
+              : null,
+            `${eta} ${t('common.min')}`,
+          ]
+            .filter(Boolean)
+            .join(' · ')}
+        </p>
+
+        <div className="mt-1 flex items-center gap-1.5">
           {store.rating != null && (
-            <span className="flex items-center gap-1 text-[14px] font-semibold text-ink flex-shrink-0">
-              <AppIcon path="ui/estrella" fallback={IconStar} size={14} />
+            <span className="flex items-center gap-1 text-[12px] font-bold text-ink">
+              <AppIcon
+                path="ui/estrella"
+                fallback={IconStar}
+                size={13}
+                className="text-mango-500"
+              />
               {Number(store.rating).toFixed(1)}
             </span>
           )}
-        </div>
-
-        <div className="flex items-center gap-2 mt-1 text-[13px] text-ink-soft">
-          <span className="flex items-center gap-1 font-medium">
-            <AppIcon path="ui/rayo" fallback={IconBolt} size={13} />
-            {eta} {t('common.min')}
-          </span>
-          {store.free_delivery && <span className="badge-promo">{t('common.freeDelivery')}</span>}
-          {store.distance_km != null && (
-            <span className="text-ink-faint">{Number(store.distance_km).toFixed(1)} {t('common.km')}</span>
-          )}
-          {!store.free_delivery && store.distance_km == null && (
-            <span className="text-ink-faint capitalize">{store.category}</span>
+          {store.free_delivery && (
+            <span className="badge-promo text-[10px]">{t('common.freeDelivery')}</span>
           )}
         </div>
       </div>

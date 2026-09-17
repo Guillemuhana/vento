@@ -6,6 +6,8 @@ export default {
   'common.save': 'Save',
   'common.saving': 'Saving…',
   'common.seeAll': 'See all',
+  'common.more': 'More',
+  'common.less': 'Less',
   'common.soon': 'Coming soon',
   'common.closed': 'Closed',
   'common.noPhoto': 'No photo',

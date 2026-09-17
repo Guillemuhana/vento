@@ -11,7 +11,7 @@ import Spinner from '../../components/ui/Spinner'
 import EmptyState from '../../components/ui/EmptyState'
 import ScrollTopPill from '../../components/layout/ScrollTopPill'
 import BuildingPromotion from '../../components/home/BuildingPromotion'
-import { IconSearch, IconChevronDown } from '../../components/ui/Icon'
+import { IconSearch, IconChevronDown, IconBell, IconPin, IconMore } from '../../components/ui/Icon'
 import AppIcon from '../../components/ui/AppIcon'
 import { useT } from '../../i18n'
 import {
@@ -31,6 +31,15 @@ import {
 } from '../../utils/feed'
 import { NEO_LOFTS_PROMOTION } from '../../data/buildingPromotions'
 
+// La fila de accesos del home: los dos rubros grandes más bebidas y farmacia.
+// El resto de las categorías queda detrás del botón "Más".
+const ACCESOS_SLUGS = ['bebidas', 'farmacia']
+const ACCESOS = [
+  ...HERO_CATEGORIES,
+  ...ACCESOS_SLUGS.map((slug) => CATEGORIES.find((c) => c.slug === slug)).filter(Boolean),
+]
+const RESTO_CATEGORIAS = CATEGORIES.filter((c) => !ACCESOS_SLUGS.includes(c.slug))
+
 export default function Home() {
   const navigate = useNavigate()
   const { t } = useT()
@@ -40,6 +49,7 @@ export default function Home() {
   const [categoriasPedidas, setCategoriasPedidas] = useState([])
   const [loading, setLoading] = useState(true)
   const [hint, setHint] = useState(0)
+  const [verTodas, setVerTodas] = useState(false)
 
   useEffect(() => {
     async function load() {
@@ -91,39 +101,47 @@ export default function Home() {
   const populares = masPopulares(stores)
   const ahorra = ahorraYDisfruta(stores)
   const esHoy = esElDia(PROMO_DEL_DIA.dia)
-  const firstName = profile?.full_name?.trim().split(/\s+/)[0] || ''
 
   return (
     <div className="container-app">
       <ScrollTopPill />
 
-      {/* Titular de ciudad + dirección de entrega */}
+      {/* Encabezado: logo a la izquierda, ciudad debajo y campana a la derecha. */}
       <header className="px-4 pt-4 pb-3">
-        <div className="flex justify-center mb-5">
-          <img
-            src="/assets/logo/logo02.png"
-            alt="Just Minutes"
-            className="h-14 w-auto max-w-[180px] object-contain"
-          />
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <img
+              src="/assets/logo/logo02.png"
+              alt="Just Minutes"
+              className="h-11 w-auto max-w-[150px] object-contain"
+            />
+            <button
+              type="button"
+              onClick={() => navigate('/cuenta/perfil')}
+              className="mt-1 flex items-center gap-1 text-left"
+            >
+              <AppIcon
+                path="ui/ubicacion"
+                fallback={IconPin}
+                size={14}
+                className="text-mango-500 flex-shrink-0"
+              />
+              <span className="text-[13px] font-semibold text-ink truncate max-w-[52vw]">
+                {profile?.address || profile?.city || 'Miami, FL'}
+              </span>
+              <AppIcon path="ui/chevron-abajo" fallback={IconChevronDown} size={14} className="text-ink-faint" />
+            </button>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => navigate('/cuenta/notificaciones')}
+            aria-label={t('account.notifications')}
+            className="h-10 w-10 flex-shrink-0 rounded-full flex items-center justify-center text-ink active:scale-90 transition"
+          >
+            <AppIcon path="ui/campana" fallback={IconBell} size={22} />
+          </button>
         </div>
-        <p className="text-[13px] text-ink-faint leading-tight">
-          {t('home.greeting', { name: firstName })}
-        </p>
-        <p className="mt-1 font-display text-[24px] font-bold leading-tight text-ink">
-          {t('home.heroTitle', { city: profile?.city || 'Miami' })}
-        </p>
-        <button
-          type="button"
-          onClick={() => navigate('/cuenta/perfil')}
-          className="mt-2 flex items-center gap-2 text-left"
-        >
-          <span className="text-[14px] text-ink-faint leading-tight truncate max-w-[75vw]">
-            {profile?.address || t('home.addAddress')}
-          </span>
-          <span className="h-6 w-6 rounded-full bg-base-muted flex items-center justify-center flex-shrink-0 text-ink">
-            <AppIcon path="ui/chevron-abajo" fallback={IconChevronDown} size={14} />
-          </span>
-        </button>
       </header>
 
       {/* Buscador (abre la pantalla de búsqueda) */}
@@ -145,19 +163,37 @@ export default function Home() {
         </button>
       </div>
 
-      {/* Tiles grandes */}
-      <div className="grid grid-cols-2 gap-3 px-4 mb-3">
-        {HERO_CATEGORIES.map((c) => (
-          <CategoryTile key={c.slug} category={c} size="hero" />
+      {/* Fila de accesos redondos, como en las piezas de marca. "Más" despliega
+          el resto de las categorías en vez de mandarlas a otra pantalla. */}
+      <div className="flex items-start justify-between gap-1 px-4 mb-5">
+        {ACCESOS.map((c) => (
+          <CategoryTile key={c.slug} category={c} size="circle" />
         ))}
+        <button
+          type="button"
+          onClick={() => setVerTodas((v) => !v)}
+          className="flex w-[64px] flex-shrink-0 flex-col items-center gap-1.5 active:scale-95 transition"
+        >
+          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-base-muted text-ink">
+            <AppIcon
+              path={verTodas ? 'ui/chevron-abajo' : 'ui/mas'}
+              fallback={verTodas ? IconChevronDown : IconMore}
+              size={20}
+            />
+          </span>
+          <span className="w-full text-center text-[11px] font-semibold leading-tight text-ink">
+            {verTodas ? t('common.less') : t('common.more')}
+          </span>
+        </button>
       </div>
 
-      {/* Categorías chicas */}
-      <div className="rail px-4 mb-6">
-        {CATEGORIES.map((c) => (
-          <CategoryTile key={c.slug} category={c} size="sm" />
-        ))}
-      </div>
+      {verTodas && (
+        <div className="rail px-4 mb-6 animate-fade-up">
+          {RESTO_CATEGORIAS.map((c) => (
+            <CategoryTile key={c.slug} category={c} size="sm" />
+          ))}
+        </div>
+      )}
 
       {/* Banners */}
       <div className="mb-7">
