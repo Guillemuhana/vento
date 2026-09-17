@@ -29,7 +29,7 @@ export default function CartBar() {
           <motion.div whileTap={{ scale: 0.98 }} transition={spring}>
             <Link
               to="/carrito"
-              className="flex items-center gap-3 rounded-full bg-mango-500 text-white pl-4 pr-3 py-3 shadow-[0_8px_24px_rgba(255,74,18,0.4)]"
+              className="flex items-center gap-3 rounded-full bg-mango-500 text-white pl-4 pr-3 py-3 shadow-[0_8px_24px_rgba(244,105,47,0.4)]"
             >
               <span className="relative flex-shrink-0">
                 <AppIcon path="ui/carrito" fallback={IconCart} size={22} />

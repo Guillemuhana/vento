@@ -4,51 +4,71 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Paleta de marca Just Minutes: verde militar, naranja y crema.
+        // El texto principal es el verde oscuro, no un gris neutro.
         ink: {
-          DEFAULT: '#101828',
-          soft: '#344054',
-          faint: '#667085',
+          DEFAULT: '#13312A',
+          soft: '#3D564C',
+          faint: '#5E7268',
         },
         base: {
           DEFAULT: '#FFFFFF',
-          muted: '#F2F4F7',
-          line: '#E4E7EC',
+          muted: '#F4F1E8',
+          line: '#E4DFD2',
         },
+        // Crema de fondo, el papel de todas las piezas de marca.
+        cream: {
+          DEFAULT: '#F7F4EC',
+          deep: '#EFEADC',
+        },
+        // Verde militar del logo, las mochilas y la moto.
+        forest: {
+          50: '#EAF0ED',
+          100: '#C9DAD2',
+          400: '#2E5F4E',
+          500: '#1B4437',
+          600: '#13312A',
+          700: '#0C231D',
+        },
+        // Naranja de marca: acentos, botones y subrayados.
         mango: {
-          50: '#FFF2EC',
-          100: '#FFDCCB',
-          400: '#FF7A47',
-          500: '#FF4A12',
-          600: '#E23E00',
-          700: '#B33100',
+          50: '#FFF2EB',
+          100: '#FFDCC9',
+          300: '#FFB08A',
+          400: '#FF8C5A',
+          500: '#F4692F',
+          600: '#DB531C',
+          700: '#B34115',
         },
+        // Se mantiene el nombre `teal` porque lo usan los estados de "ok",
+        // pero ahora es el mismo verde de la marca.
         teal: {
-          50: '#ECFDF3',
-          100: '#D3F8DF',
-          400: '#22C55E',
-          500: '#15803D',
-          600: '#116430',
-          700: '#0D4D25',
+          50: '#EAF0ED',
+          100: '#C9DAD2',
+          400: '#2E5F4E',
+          500: '#1B4437',
+          600: '#13312A',
+          700: '#0C231D',
         },
         danger: {
           400: '#F97066',
           500: '#DC2626',
           600: '#B42318',
         },
-        // Amarillo de promos ("ENVÍO GRATIS") — siempre con texto negro.
+        // Badge de promos ("ENVÍO GRATIS") — siempre con texto oscuro.
         promo: {
-          DEFAULT: '#FFE000',
-          soft: '#FFF3A8',
+          DEFAULT: '#FFC94A',
+          soft: '#FFE9B8',
         },
-        // Fondos pastel de los tiles de categoría del home.
+        // Fondos de los tiles de categoría del home, todos dentro de la marca.
         tile: {
-          peach: '#FDEEE6',
-          peachInk: '#8A3A21',
-          mint: '#DFF1EC',
-          mintInk: '#1F6F63',
-          lilac: '#EDEAFB',
-          lilacInk: '#4B3F9E',
-          butter: '#FDF2D8',
+          peach: '#FDE9DD',
+          peachInk: '#A8431B',
+          mint: '#DFE9E3',
+          mintInk: '#1B4437',
+          lilac: '#EFEADC',
+          lilacInk: '#5C5233',
+          butter: '#FBEFD6',
           butterInk: '#8A6212',
         },
       },
@@ -57,10 +77,10 @@ export default {
         body: ['"Inter"', 'sans-serif'],
       },
       boxShadow: {
-        card: '0 1px 2px rgba(16,24,40,0.06), 0 1px 3px rgba(16,24,40,0.08)',
-        float: '0 8px 24px rgba(16,24,40,0.12)',
+        card: '0 1px 2px rgba(19,49,42,0.06), 0 1px 3px rgba(19,49,42,0.08)',
+        float: '0 8px 24px rgba(19,49,42,0.12)',
         // Sombra difusa de la nav flotante y de la search bar del home.
-        pill: '0 6px 20px rgba(16,24,40,0.10), 0 2px 6px rgba(16,24,40,0.06)',
+        pill: '0 6px 20px rgba(19,49,42,0.10), 0 2px 6px rgba(19,49,42,0.06)',
       },
       borderRadius: {
         xl2: '1.25rem',

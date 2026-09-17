@@ -7,7 +7,7 @@ html, body, #root {
 }
 
 body {
-  @apply font-body text-ink bg-[#F6F6F6] antialiased;
+  @apply font-body text-ink bg-cream antialiased;
 }
 
 h1, h2, h3, h4 {
@@ -52,11 +52,11 @@ h1, h2, h3, h4 {
 }
 
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-ink text-white font-semibold text-sm px-5 py-3 hover:bg-black transition disabled:opacity-40 disabled:cursor-not-allowed;
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-ink text-white font-semibold text-sm px-5 py-3 hover:bg-forest-700 transition disabled:opacity-40 disabled:cursor-not-allowed;
 }
 
 .btn-accent {
-  @apply inline-flex items-center justify-center gap-2 rounded-full bg-mango-500 text-white font-bold text-sm px-5 py-3 shadow-[0_4px_14px_rgba(255,74,18,0.35)] hover:bg-mango-600 transition disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none;
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-mango-500 text-white font-bold text-sm px-5 py-3 shadow-[0_4px_14px_rgba(244,105,47,0.35)] hover:bg-mango-600 transition disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none;
 }
 
 .btn-outline {
@@ -85,7 +85,7 @@ h1, h2, h3, h4 {
   @apply font-display font-bold text-[22px] leading-snug text-ink;
 }
 
-/* Badge amarillo de promo, texto negro. */
+/* Badge ámbar de promo, siempre con texto verde oscuro. */
 .badge-promo {
   @apply inline-flex items-center gap-1 rounded-md bg-promo text-ink font-bold text-[11px] leading-none px-2 py-1;
 }
@@ -93,8 +93,8 @@ h1, h2, h3, h4 {
 /* Entrada del login: marca viva, pero sin movimiento obligatorio. */
 .login-stage {
   isolation: isolate;
-  background-image: radial-gradient(circle at 15% 10%, rgba(255, 122, 71, 0.14), transparent 28rem),
-    radial-gradient(circle at 90% 90%, rgba(16, 24, 40, 0.08), transparent 24rem);
+  background-image: radial-gradient(circle at 15% 10%, rgba(244, 105, 47, 0.16), transparent 28rem),
+    radial-gradient(circle at 90% 90%, rgba(19, 49, 42, 0.12), transparent 24rem);
 }
 .login-shell {
   animation: login-shell-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;

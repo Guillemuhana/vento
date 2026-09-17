@@ -25,7 +25,7 @@ export default function Login() {
   }
 
   return (
-    <div className="login-stage min-h-screen bg-[#F6F6F6] px-4 py-5 sm:px-6 sm:py-8">
+    <div className="login-stage min-h-screen bg-cream px-4 py-5 sm:px-6 sm:py-8">
       <div className="login-shell mx-auto flex min-h-[calc(100vh-2.5rem)] max-w-5xl overflow-hidden rounded-[2rem] bg-base shadow-float sm:min-h-[calc(100vh-4rem)]">
         <div className="relative hidden w-[46%] overflow-hidden bg-ink px-10 py-12 md:flex md:flex-col md:justify-between">
           <div className="login-orb absolute -right-24 -top-24 h-64 w-64 rounded-full bg-mango-500/90" />
@@ -38,7 +38,7 @@ export default function Login() {
             />
           </div>
           <div className="login-copy relative max-w-xs text-white">
-            <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-mango-300">Vento Miami</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-mango-300">Miami, FL</p>
             <p className="mt-3 font-display text-3xl font-bold leading-tight">{t('auth.tagline')}</p>
           </div>
         </div>

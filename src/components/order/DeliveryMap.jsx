@@ -30,8 +30,8 @@ const SVG_TIENDA = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" 
   <path d="M4.5 9.5h15V19a1.4 1.4 0 0 1-1.4 1.4H5.9A1.4 1.4 0 0 1 4.5 19V9.5Z"/>
   <path d="M3.5 9.5 5 5h14l1.5 4.5"/></svg>`
 
-const ICONO_REPARTIDOR = pin({ color: '#FF4A12', ring: 'rgba(255,74,18,.18)', svg: SVG_MOTO })
-const ICONO_COMERCIO = pin({ color: '#101828', svg: SVG_TIENDA })
+const ICONO_REPARTIDOR = pin({ color: '#F4692F', ring: 'rgba(244,105,47,.18)', svg: SVG_MOTO })
+const ICONO_COMERCIO = pin({ color: '#13312A', svg: SVG_TIENDA })
 
 // Encuadra el mapa para que entren todos los puntos, y lo vuelve a hacer
 // cuando el repartidor se mueve.
@@ -85,7 +85,7 @@ export default function DeliveryMap({ courier, store, height = 'h-72', className
         {puntos.length === 2 && (
           <Polyline
             positions={puntos}
-            pathOptions={{ color: '#FF4A12', weight: 4, opacity: 0.55, dashArray: '1 10', lineCap: 'round' }}
+            pathOptions={{ color: '#F4692F', weight: 4, opacity: 0.55, dashArray: '1 10', lineCap: 'round' }}
           />
         )}
 

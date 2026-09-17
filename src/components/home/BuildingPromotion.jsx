@@ -27,7 +27,7 @@ export default function BuildingPromotion({ building }) {
         </div>
         <p className="mt-2 max-w-md text-[13px] leading-snug text-white drop-shadow-sm">{t('buildingPromo.text')}</p>
         <p className="mt-2 text-[12px] text-white/90">{building.address}</p>
-        <Link to="/ofertas" className="mt-3 inline-flex w-fit rounded-full bg-mango-500 px-4 py-2.5 text-[13px] font-bold text-white shadow-[0_4px_14px_rgba(255,74,18,0.35)]">
+        <Link to="/ofertas" className="mt-3 inline-flex w-fit rounded-full bg-mango-500 px-4 py-2.5 text-[13px] font-bold text-white shadow-[0_4px_14px_rgba(244,105,47,0.35)]">
           {t('buildingPromo.cta')}
         </Link>
         </div>

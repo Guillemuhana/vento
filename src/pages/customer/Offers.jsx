@@ -34,7 +34,7 @@ export default function Offers() {
     <div className="container-app">
       <ScrollTopPill />
 
-      <h1 className="screen-title text-[#0A84FF] px-4 pt-5 pb-6">{t('offers.title')}</h1>
+      <h1 className="screen-title text-mango-500 px-4 pt-5 pb-6">{t('offers.title')}</h1>
 
       <BuildingPromotion building={NEO_LOFTS_PROMOTION} />
 
