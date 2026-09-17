@@ -114,7 +114,7 @@ export default function Home() {
         </p>
         <button
           type="button"
-          onClick={() => navigate('/cuenta/direcciones')}
+          onClick={() => navigate('/cuenta/perfil')}
           className="mt-2 flex items-center gap-2 text-left"
         >
           <span className="text-[14px] text-ink-faint leading-tight truncate max-w-[75vw]">

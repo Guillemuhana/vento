@@ -134,7 +134,7 @@ export default function Account() {
 
         <div className="grid grid-cols-3 gap-3">
           <QuickTile icon={IconPedidos} label={t('account.orders')} to="/pedidos" />
-          <QuickTile icon={IconAyuda} label={t('account.help')} onClick={soon} />
+          <QuickTile icon={IconAyuda} label={t('account.help')} to="/cuenta/ayuda" />
           <QuickTile icon={IconMetodosPago} label={t('account.payment')} onClick={soon} />
         </div>
       </div>
@@ -142,15 +142,15 @@ export default function Account() {
       <Section title={t('account.benefits')}>
         <Row icon={IconCreditos} label={t('account.credits')} value={formatMoney(0)} />
         <Row icon={IconCupones} label={t('account.coupons')} onClick={soon} />
-        <Row icon={IconLoyalty} label={t('account.loyalty')} onClick={soon} />
+        <Row icon={IconLoyalty} label={t('account.loyalty')} to="/beneficios" />
       </Section>
 
       <Section title={t('account.myAccount')}>
-        <Row icon={IconCrown} label={t('account.pro')} onClick={soon} />
-        <Row icon={IconDirecciones} label={t('account.addresses')} onClick={soon} />
+        <Row icon={IconCrown} label={t('account.pro')} to="/cuenta/pro" />
+        <Row icon={IconDirecciones} label={t('account.addresses')} to="/cuenta/perfil" />
         <Row icon={IconMetodosPago} label={t('account.payment')} onClick={soon} />
         <Row icon={IconFacturacion} label={t('account.billing')} onClick={soon} />
-        <Row icon={IconAyuda} label={t('account.help')} onClick={soon} />
+        <Row icon={IconAyuda} label={t('account.help')} to="/cuenta/ayuda" />
       </Section>
 
       <Section title={t('account.settings')}>
@@ -160,11 +160,11 @@ export default function Account() {
           value={idiomaActual?.nativeLabel}
           onClick={() => setLangOpen(true)}
         />
-        <Row icon={IconNotificaciones} label={t('account.notifications')} onClick={soon} />
+        <Row icon={IconNotificaciones} label={t('account.notifications')} to="/cuenta/notificaciones" />
       </Section>
 
       <Section title={t('account.moreInfo')}>
-        <Row icon={IconAliado} label={t('account.partner')} onClick={soon} />
+        <Row icon={IconAliado} label={t('account.partner')} to="/cuenta/aliado" />
         <Row icon={IconTerminos} label={t('account.terms')} onClick={soon} />
         <Row icon={IconPrivacidad} label={t('account.privacy')} onClick={soon} />
       </Section>

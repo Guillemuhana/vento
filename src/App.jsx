@@ -21,6 +21,11 @@ import Offers from './pages/customer/Offers'
 import Favorites from './pages/customer/Favorites'
 import Search from './pages/customer/Search'
 import CategoryStores from './pages/customer/CategoryStores'
+import Help from './pages/customer/Help'
+import PartnerRequest from './pages/customer/PartnerRequest'
+import Pro from './pages/customer/Pro'
+import Notifications from './pages/customer/Notifications'
+import Loyalty from './pages/Loyalty'
 
 import StoreDashboard from './pages/store-owner/Dashboard'
 import StoreProducts from './pages/store-owner/Products'
@@ -35,6 +40,7 @@ import CourierEarnings from './pages/courier/Earnings'
 import AdminDashboard from './pages/admin/Dashboard'
 import AdminStores from './pages/admin/Stores'
 import AdminUsers from './pages/admin/Users'
+import AdminRequests from './pages/admin/Requests'
 
 function CustomerLayout({ children }) {
   return (
@@ -181,7 +187,19 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/beneficios"
+          element={
+            <ProtectedRoute roles={['cliente', 'repartidor']}>
+              <Loyalty />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/perfil" element={<Navigate to="/cuenta" replace />} />
+        <Route path="/cuenta/ayuda" element={<ProtectedRoute><Help /></ProtectedRoute>} />
+        <Route path="/cuenta/aliado" element={<ProtectedRoute><PartnerRequest /></ProtectedRoute>} />
+        <Route path="/cuenta/pro" element={<ProtectedRoute><Pro /></ProtectedRoute>} />
+        <Route path="/cuenta/notificaciones" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
 
         {/* Comercio */}
         <Route
@@ -250,6 +268,10 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/repartidor/beneficios"
+          element={<Navigate to="/beneficios" replace />}
+        />
 
         {/* Admin */}
         <Route
@@ -273,6 +295,14 @@ export default function App() {
           element={
             <ProtectedRoute roles={['admin']}>
               <AdminUsers />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/solicitudes"
+          element={
+            <ProtectedRoute roles={['admin']}>
+              <AdminRequests />
             </ProtectedRoute>
           }
         />
