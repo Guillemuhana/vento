@@ -49,14 +49,18 @@ export default function Orders() {
 
   if (loading || !storeId) return <Spinner className="py-20" />
 
+  // Un pedido con tarjeta todavía sin cobrar no es un pedido: hasta que Stripe
+  // confirme, el comercio no lo ve ni lo empieza a preparar.
+  const visibles = orders.filter((order) => order.payment_status !== 'pendiente')
+
   return (
     <div className="container-app">
       <Navbar title="Pedidos activos" back />
       <div className="px-4 py-3 space-y-3">
-        {orders.length === 0 && (
+        {visibles.length === 0 && (
           <EmptyState icon="🧾" title="No hay pedidos activos" description="Los nuevos pedidos van a aparecer acá en tiempo real." />
         )}
-        {orders.map((order) => (
+        {visibles.map((order) => (
           <div key={order.id} className="card p-4">
             <div className="flex justify-between items-start mb-2">
               <div>
@@ -67,7 +71,12 @@ export default function Orders() {
                 {t(`status.${order.status}`)}
               </span>
             </div>
-            <p className="text-sm font-bold mb-3">{formatMoney(order.total)}</p>
+            <p className="text-sm font-bold mb-3">
+              {formatMoney(order.total)}
+              {order.payment_status === 'pagado' && (
+                <span className="ml-2 text-xs font-semibold text-ink-soft">✓ Pagado con tarjeta</span>
+              )}
+            </p>
             <div className="border-t border-base-line pt-3 mb-3 space-y-1.5">
               {(order.order_items || []).map((item) => (
                 <div key={item.id} className="flex items-center justify-between gap-3 text-sm">

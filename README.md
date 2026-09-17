@@ -69,6 +69,91 @@ El orden, si hay que rearmar la base desde cero (o pegá directo
 4. `004_perfil_al_registrarse.sql` — crea el perfil (y el comercio o el registro de
    repartidor, según el rol) con un trigger sobre `auth.users`. Sin esto el registro
    queda a medias cuando la confirmación de email está activada.
+5. `006_mollejas_image.sql` — foto de un producto de demo.
+6. `007_profile_avatars.sql` — bucket y políticas para la foto de perfil.
+7. `008_seguridad.sql` — el servidor deja de confiar en el navegador: precios,
+   totales, costo de envío y rol de usuario se calculan del lado de la base.
+8. `009_puntos_y_beneficios.sql` — puntos, historial y catálogo de beneficios.
+9. `010_soporte_alianzas_y_pro.sql` — tablas de Ayuda, Aliados y Just Minutes Pro.
+10. `011_pro_reintento.sql` — permite volver a pedir Pro después de una baja.
+11. `012_pagos_stripe.sql` — estado de pago en `orders` y bloqueo para que solo
+    el webhook de Stripe pueda marcar un pedido como pagado.
+
+## 💳 Pagos con Stripe
+
+Solo el método **tarjeta** pasa por Stripe. Efectivo y billetera siguen creando el
+pedido directo, como siempre.
+
+### Cómo funciona
+
+1. El cliente elige "Tarjeta" y confirma. El navegador **no** manda precios: manda
+   qué productos y cuántos.
+2. La Edge Function `create-checkout-session` crea el pedido con la service role,
+   así corren los triggers de `008_seguridad.sql` que ponen el precio real de cada
+   ítem y recalculan el total. Con ese total (el de la base, no el del navegador)
+   arma la Checkout Session y devuelve la URL de Stripe.
+3. El pedido nace con `payment_status = 'pendiente'`. Mientras esté así, **el
+   comercio no lo ve** en "Pedidos activos".
+4. El cliente paga en la página de Stripe y vuelve a `/checkout?pago=exito`.
+5. Stripe llama a `stripe-webhook`, que verifica la firma y marca el pedido como
+   pagado. Es el **único** lugar del sistema que puede hacerlo: el trigger
+   `congelar_pago` descarta cualquier intento de tocar esos campos desde un JWT
+   de usuario.
+6. La pantalla de seguimiento pasa de "Confirmando el pago…" a "Pago confirmado"
+   por Realtime, sin recargar.
+
+Si el cliente cancela en Stripe, `cancel-checkout-session` expira la sesión y
+cancela el pedido en el acto; si simplemente cierra la pestaña, el webhook lo
+cancela cuando la sesión expira (35 minutos).
+
+### Secrets (no van en el `.env` del frontend)
+
+El navegador nunca ve una clave de Stripe. Se cargan en Supabase:
+
+```bash
+supabase secrets set STRIPE_SECRET_KEY=sk_test_xxx
+supabase secrets set STRIPE_WEBHOOK_SECRET=whsec_xxx
+supabase secrets set APP_URL=https://tu-app.vercel.app
+supabase secrets set STRIPE_CURRENCY=usd
+```
+
+### Ojo con la moneda
+
+`STRIPE_CURRENCY` tiene que ser una moneda que **el país de la cuenta de Stripe**
+acepte, no la que use la app. Una cuenta creada en Brasil solo cobra en `brl`;
+para cobrar en dólares en Miami hace falta una cuenta con país Estados Unidos.
+El país de una cuenta de Stripe no se puede cambiar después de creada: si no
+coincide, hay que crear una cuenta nueva.
+
+Si no se define, el valor por defecto es `usd`.
+
+`SUPABASE_URL`, `SUPABASE_ANON_KEY` y `SUPABASE_SERVICE_ROLE_KEY` las inyecta
+Supabase sola.
+
+### Deploy
+
+```bash
+supabase db push                                       # aplica la 012
+supabase functions deploy create-checkout-session
+supabase functions deploy cancel-checkout-session
+supabase functions deploy stripe-webhook --no-verify-jwt
+```
+
+El `--no-verify-jwt` del webhook es obligatorio: quien llama es Stripe, que no
+tiene sesión de Supabase. La seguridad ahí la da la firma, no el JWT.
+
+En el dashboard de Stripe → Developers → Webhooks, agregá el endpoint
+`https://<tu-proyecto>.supabase.co/functions/v1/stripe-webhook` con los eventos
+`checkout.session.completed`, `checkout.session.expired`,
+`checkout.session.async_payment_succeeded`, `checkout.session.async_payment_failed`
+y `charge.refunded`. El `whsec_...` que te da ahí es el `STRIPE_WEBHOOK_SECRET`.
+
+### Probar
+
+Con Stripe en modo test, tarjeta `4242 4242 4242 4242`, cualquier vencimiento
+futuro y CVC `123`. Para un pago rechazado: `4000 0000 0000 0002`.
+Como comercio, verificá que el pedido **no** aparece en "Pedidos activos" hasta
+que el pago se confirma.
 
 ## GitHub y despliegue
 

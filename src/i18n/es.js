@@ -235,7 +235,7 @@ export default {
   'store.open': 'Abierto',
   'store.new': 'Nuevo',
 
-  'auth.tagline': 'Todo lo que necesitás, en minutos.',
+  'auth.tagline': 'Tu barrio, a minutos de distancia.',
   'auth.email': 'Email',
   'auth.password': 'Contraseña',
   'auth.signIn': 'Ingresar',
@@ -316,4 +316,21 @@ export default {
   'notifications.promotionsDescription': 'Ofertas de los comercios de Miami y promos flash por tiempo limitado.',
   'notifications.points': 'Puntos y beneficios',
   'notifications.pointsDescription': 'Cuando sumás puntos o se libera un beneficio para canjear.',
+
+  'checkout.pay': 'Pagar {total} con tarjeta',
+  'checkout.redirecting': 'Te llevamos a pagar…',
+  'checkout.stripeNote': 'El pago lo procesa Stripe en una página segura. Nunca guardamos los datos de tu tarjeta.',
+  'checkout.paymentProcessing': 'Estamos confirmando tu pago…',
+  'checkout.paymentCancelled': 'Cancelaste el pago. No te cobramos nada.',
+  'checkout.paymentError': 'No pudimos iniciar el pago. Intentá de nuevo.',
+  'checkout.emptyCart': 'Tu carrito está vacío',
+
+  'payment.pendingTitle': 'Confirmando el pago…',
+  'payment.pendingDetail': 'En cuanto Stripe confirme, el comercio recibe tu pedido.',
+  'payment.paidTitle': 'Pago confirmado',
+  'payment.paidDetail': 'Ya le avisamos al comercio para que prepare tu pedido.',
+  'payment.failedTitle': 'El pago no se completó',
+  'payment.failedDetail': 'No te cobramos nada. Podés volver a intentarlo desde el carrito.',
+  'payment.refundedTitle': 'Pago reembolsado',
+  'payment.refundedDetail': 'El dinero vuelve a tu tarjeta en los próximos días hábiles.',
 }

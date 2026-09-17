@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import Navbar from '../../components/layout/Navbar'
 import { useCartStore } from '../../store/useCartStore'
@@ -21,6 +21,7 @@ const PAYMENT_METHODS = [
 export default function Checkout() {
   const navigate = useNavigate()
   const { t } = useT()
+  const [params, setParams] = useSearchParams()
   const { items, storeId, storeName, subtotal, clear } = useCartStore()
   const profile = useAuthStore((s) => s.profile)
   const session = useAuthStore((s) => s.session)
@@ -28,54 +29,125 @@ export default function Checkout() {
   const [payment, setPayment] = useState('efectivo')
   const [notes, setNotes] = useState('')
   const [placing, setPlacing] = useState(false)
+  const vueltaDeStripe = useRef(false)
 
   const total = subtotal() + DELIVERY_FEE
+
+  // Vuelta desde la página de pago de Stripe: ?pago=exito|cancelado&pedido=<id>
+  useEffect(() => {
+    const pago = params.get('pago')
+    const pedido = params.get('pedido')
+    if (!pago || vueltaDeStripe.current) return
+    vueltaDeStripe.current = true
+    setParams({}, { replace: true })
+
+    if (pago === 'exito' && pedido) {
+      clear()
+      toast.success(t('checkout.paymentProcessing'))
+      navigate(`/pedido/${pedido}`, { replace: true })
+      return
+    }
+
+    if (pago === 'cancelado') {
+      toast(t('checkout.paymentCancelled'))
+      // El pedido quedó creado y sin pagar: se cancela para que el comercio
+      // no lo vea y para liberar la sesión de Stripe.
+      if (pedido) {
+        supabase.functions
+          .invoke('cancel-checkout-session', { body: { orderId: pedido } })
+          .catch(() => {})
+      }
+    }
+  }, [params, setParams, clear, navigate, t])
+
+  // Efectivo y billetera: el pedido se crea directo, como siempre.
+  async function pedidoSinTarjeta() {
+    const { data: order, error } = await supabase
+      .from('orders')
+      .insert({
+        customer_id: session.user.id,
+        store_id: storeId,
+        status: 'pendiente',
+        subtotal: subtotal(),
+        delivery_fee: DELIVERY_FEE,
+        total,
+        delivery_address: address,
+        payment_method: payment,
+        notes,
+      })
+      .select()
+      .single()
+
+    if (error) throw error
+
+    const orderItems = items.map((i) => ({
+      order_id: order.id,
+      product_id: i.productId,
+      product_name: i.name,
+      quantity: i.quantity,
+      unit_price: i.price,
+      notes: i.notes,
+    }))
+    const { error: itemsError } = await supabase.from('order_items').insert(orderItems)
+    if (itemsError) throw itemsError
+
+    clear()
+    toast.success(t('checkout.created'))
+    navigate(`/pedido/${order.id}`)
+  }
+
+  // Tarjeta: el pedido y el cobro los arma la Edge Function, y el cliente
+  // termina de pagar en la página de Stripe.
+  async function pagarConTarjeta() {
+    const { data, error } = await supabase.functions.invoke('create-checkout-session', {
+      body: {
+        storeId,
+        address: address.trim(),
+        notes,
+        items: items.map((i) => ({
+          productId: i.productId,
+          name: i.name,
+          quantity: i.quantity,
+          notes: i.notes,
+        })),
+      },
+    })
+    if (error) throw new Error(t('checkout.paymentError'))
+    if (data?.error) throw new Error(data.error)
+    if (!data?.url) throw new Error(t('checkout.paymentError'))
+    window.location.href = data.url
+  }
 
   async function handlePlaceOrder() {
     if (!address.trim()) {
       toast.error(t('checkout.addressRequired'))
       return
     }
+    if (!items.length) {
+      toast.error(t('checkout.emptyCart'))
+      return
+    }
     setPlacing(true)
     try {
-      const { data: order, error } = await supabase
-        .from('orders')
-        .insert({
-          customer_id: session.user.id,
-          store_id: storeId,
-          status: 'pendiente',
-          subtotal: subtotal(),
-          delivery_fee: DELIVERY_FEE,
-          total,
-          delivery_address: address,
-          payment_method: payment,
-          notes,
-        })
-        .select()
-        .single()
-
-      if (error) throw error
-
-      const orderItems = items.map((i) => ({
-        order_id: order.id,
-        product_id: i.productId,
-        product_name: i.name,
-        quantity: i.quantity,
-        unit_price: i.price,
-        notes: i.notes,
-      }))
-      const { error: itemsError } = await supabase.from('order_items').insert(orderItems)
-      if (itemsError) throw itemsError
-
-      clear()
-      toast.success(t('checkout.created'))
-      navigate(`/pedido/${order.id}`)
+      if (payment === 'tarjeta') {
+        await pagarConTarjeta()
+        return // no se apaga el spinner: el navegador se va a Stripe
+      }
+      await pedidoSinTarjeta()
     } catch (err) {
       toast.error(err.message || t('checkout.error'))
     } finally {
       setPlacing(false)
     }
   }
+
+  const textoBoton = placing
+    ? payment === 'tarjeta'
+      ? t('checkout.redirecting')
+      : t('checkout.placing')
+    : payment === 'tarjeta'
+      ? t('checkout.pay', { total: formatMoney(total) })
+      : t('checkout.place', { total: formatMoney(total) })
 
   return (
     <div className="container-app">
@@ -109,6 +181,9 @@ export default function Checkout() {
               </button>
             ))}
           </div>
+          {payment === 'tarjeta' && (
+            <p className="text-xs text-ink-faint mt-2">{t('checkout.stripeNote')}</p>
+          )}
         </section>
 
         <section>
@@ -142,7 +217,7 @@ export default function Checkout() {
       <div className="fixed bottom-0 left-0 right-0 px-4 py-3 bg-base border-t border-base-line">
         <div className="max-w-md md:max-w-lg mx-auto">
           <button onClick={handlePlaceOrder} disabled={placing} className="btn-accent w-full">
-            {placing ? t('checkout.placing') : t('checkout.place', { total: formatMoney(total) })}
+            {textoBoton}
           </button>
         </div>
       </div>

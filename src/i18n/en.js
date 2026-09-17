@@ -235,7 +235,7 @@ export default {
   'store.open': 'Open',
   'store.new': 'New',
 
-  'auth.tagline': 'Everything you need, in minutes.',
+  'auth.tagline': 'Your neighborhood. Just minutes away.',
   'auth.email': 'Email',
   'auth.password': 'Password',
   'auth.signIn': 'Sign in',
@@ -316,4 +316,21 @@ export default {
   'notifications.promotionsDescription': 'Offers from Miami stores and limited-time flash deals.',
   'notifications.points': 'Points and rewards',
   'notifications.pointsDescription': 'When you earn points or unlock a reward to redeem.',
+
+  'checkout.pay': 'Pay {total} by card',
+  'checkout.redirecting': 'Taking you to checkout…',
+  'checkout.stripeNote': 'Payments are handled by Stripe on a secure page. We never store your card details.',
+  'checkout.paymentProcessing': 'Confirming your payment…',
+  'checkout.paymentCancelled': 'You cancelled the payment. Nothing was charged.',
+  'checkout.paymentError': "We couldn't start the payment. Please try again.",
+  'checkout.emptyCart': 'Your cart is empty',
+
+  'payment.pendingTitle': 'Confirming payment…',
+  'payment.pendingDetail': 'As soon as Stripe confirms, the store gets your order.',
+  'payment.paidTitle': 'Payment confirmed',
+  'payment.paidDetail': 'The store has been notified and is preparing your order.',
+  'payment.failedTitle': "Payment didn't go through",
+  'payment.failedDetail': 'Nothing was charged. You can try again from your cart.',
+  'payment.refundedTitle': 'Payment refunded',
+  'payment.refundedDetail': 'The money goes back to your card within a few business days.',
 }

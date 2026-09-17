@@ -8,6 +8,34 @@ import { formatMoney } from '../../utils/format'
 import { distanciaKm } from '../../utils/geo'
 import { useT } from '../../i18n'
 
+// Cartel de cobro que ve el cliente. 'no_aplica' (efectivo y billetera) no muestra nada.
+const ESTADOS_PAGO = {
+  pendiente: {
+    icono: '⏳',
+    titulo: 'payment.pendingTitle',
+    detalle: 'payment.pendingDetail',
+    clase: 'border border-base-line',
+  },
+  pagado: {
+    icono: '✅',
+    titulo: 'payment.paidTitle',
+    detalle: 'payment.paidDetail',
+    clase: 'border border-base-line',
+  },
+  fallido: {
+    icono: '⚠️',
+    titulo: 'payment.failedTitle',
+    detalle: 'payment.failedDetail',
+    clase: 'border border-base-line',
+  },
+  reembolsado: {
+    icono: '↩️',
+    titulo: 'payment.refundedTitle',
+    detalle: 'payment.refundedDetail',
+    clase: 'border border-base-line',
+  },
+}
+
 export default function OrderTracking() {
   const { id } = useParams()
   const { t } = useT()
@@ -30,6 +58,9 @@ export default function OrderTracking() {
   // Distancia entre el repartidor y el comercio, para dar una referencia real
   // del avance sin inventar un tiempo de llegada.
   const km = courierPos && storePos ? distanciaKm(courierPos, storePos) : null
+
+  // Estado del cobro, solo para pedidos con tarjeta (el resto queda en 'no_aplica').
+  const pago = ESTADOS_PAGO[order.payment_status] || null
 
   const enCurso = order.status !== 'entregado' && order.status !== 'cancelado'
   const mostrarMapa = Boolean(courierPos || storePos) && enCurso
@@ -60,6 +91,16 @@ export default function OrderTracking() {
       )}
 
       <div className="px-4 py-4 space-y-5">
+        {pago && (
+          <div className={`card p-4 flex items-center gap-3 ${pago.clase}`}>
+            <span className="text-lg">{pago.icono}</span>
+            <div className="min-w-0">
+              <p className="font-semibold text-sm">{t(pago.titulo)}</p>
+              <p className="text-xs text-ink-faint mt-0.5">{t(pago.detalle)}</p>
+            </div>
+          </div>
+        )}
+
         <div className="card p-4">
           <OrderStatusTracker status={order.status} />
         </div>
