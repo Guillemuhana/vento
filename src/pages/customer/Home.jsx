@@ -111,7 +111,7 @@ export default function Home() {
           del buscador. */}
       <header className="px-4 pt-4 pb-4">
         <div className="flex items-center gap-3">
-          <Cartel className="-ml-4 h-[111px]" />
+          <Cartel className="-ml-4 h-[113px]" />
 
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1">
@@ -168,20 +168,20 @@ export default function Home() {
 
       {/* Fila de accesos redondos, como en las piezas de marca. "Más" despliega
           el resto de las categorías en vez de mandarlas a otra pantalla. */}
-      <div className="flex items-start justify-between gap-1 px-4 mb-5 md:justify-start md:gap-8">
+      <div className="rail items-start px-4 mb-5 md:gap-8">
         {ACCESOS.map((c) => (
           <CategoryTile key={c.slug} category={c} size="circle" />
         ))}
         <button
           type="button"
           onClick={() => setVerTodas((v) => !v)}
-          className="flex w-[70px] flex-shrink-0 flex-col items-center gap-1.5 active:scale-95 transition"
+          className="flex w-[76px] flex-shrink-0 snap-start flex-col items-center gap-1.5 active:scale-95 transition"
         >
-          <span className="flex h-[66px] w-[66px] items-center justify-center rounded-full bg-base-muted text-ink">
+          <span className="flex h-[73px] w-[73px] items-center justify-center rounded-full bg-base-muted text-ink">
             <AppIcon
               path={verTodas ? 'ui/chevron-abajo' : 'ui/mas'}
               fallback={verTodas ? IconChevronDown : IconMore}
-              size={24}
+              size={26}
             />
           </span>
           <span className="w-full text-center text-[11px] font-semibold leading-tight text-ink">

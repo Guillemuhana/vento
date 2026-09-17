@@ -104,6 +104,52 @@ h1, h2, h3, h4 {
   @apply inline-flex items-center gap-1 rounded-md bg-promo text-ink font-bold text-[11px] leading-none px-2 py-1;
 }
 
+/* Reflejo que cruza el cartel.
+   Es una banda de luz en diagonal recortada con la silueta del propio PNG, así
+   corre por el disco y el brazo en vez de ser un rectángulo de luz encima. La
+   banda mide más del doble del ancho: entra por un lado, sale por el otro y
+   después se queda quieta unos segundos antes de volver a pasar. */
+.cartel-brillo {
+  background-image: linear-gradient(
+    102deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.34) 47%,
+    rgba(255, 255, 255, 0.72) 51%,
+    rgba(255, 255, 255, 0.28) 55%,
+    transparent 62%
+  );
+  background-size: 260% 100%;
+  background-repeat: no-repeat;
+  -webkit-mask-image: url('/assets/logo/cartel-app.png');
+  mask-image: url('/assets/logo/cartel-app.png');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  animation: cartel-reflejo 5.5s ease-in-out infinite;
+}
+
+@keyframes cartel-reflejo {
+  0% {
+    background-position: 170% 0;
+  }
+  38% {
+    background-position: -70% 0;
+  }
+  100% {
+    background-position: -70% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cartel-brillo {
+    animation: none;
+    opacity: 0;
+  }
+}
+
 /* Entrada del login: marca viva, pero sin movimiento obligatorio. */
 .login-stage {
   isolation: isolate;
