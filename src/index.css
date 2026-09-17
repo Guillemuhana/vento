@@ -114,8 +114,33 @@ h1, h2, h3, h4 {
   }
 }
 
+/* Luz de las letras. "screen" suma luz sobre la foto del cartel en vez de
+   taparla, que es justo lo que hace un tubo encendido detras de un acrilico.
+   El latido va desfasado del resplandor de afuera para que no respiren igual. */
+.cartel-luz {
+  mix-blend-mode: screen;
+}
+.cartel-luz-derrame {
+  filter: blur(7px);
+  animation: cartel-brasa 4.2s 1.6s ease-in-out infinite alternate;
+}
+.cartel-luz-nucleo {
+  filter: blur(1px);
+  opacity: 0.9;
+}
+
+@keyframes cartel-brasa {
+  from {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 0.95;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .cartel-resplandor {
+  .cartel-resplandor,
+  .cartel-luz-derrame {
     animation: none;
   }
 }
